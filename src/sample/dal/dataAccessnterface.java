@@ -1,8 +1,7 @@
-package dal;
+package sample.dal;
 
-import be.Song;
+import sample.be.Song;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface dataAccessnterface {

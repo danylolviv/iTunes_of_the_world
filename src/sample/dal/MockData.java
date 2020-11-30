@@ -1,6 +1,6 @@
-package dal;
+package sample.dal;
 
-import be.Song;
+import sample.be.Song;
 
 import java.util.List;
 
