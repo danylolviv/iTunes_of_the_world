@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="457.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="457.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="sample.gui.controller.MainViewController">
    <center>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -27,15 +26,15 @@
                      <right>
                         <HBox prefHeight="62.0" prefWidth="55.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button mnemonicParsing="false" text="Delete" />
+                              <Button fx:id="deletePlaylistbtn" mnemonicParsing="false" text="Delete" />
                            </children>
                         </HBox>
                      </right>
                      <center>
                         <HBox prefHeight="79.0" prefWidth="61.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button mnemonicParsing="false" text="New" />
-                              <Button mnemonicParsing="false" text="Edit" />
+                              <Button fx:id="newPlaylistbtn" mnemonicParsing="false" onAction="#handleNewPlaylistbtn" text="New" />
+                              <Button fx:id="editPlaylistbtn" mnemonicParsing="false" text="Edit" />
                            </children>
                         </HBox>
                      </center>
@@ -94,7 +93,7 @@
                      <center>
                         <HBox prefHeight="74.0" prefWidth="163.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button mnemonicParsing="false" text="New" />
+                              <Button fx:id="newSongButton" mnemonicParsing="false" text="New" />
                               <Button mnemonicParsing="false" text="Edit" />
                            </children>
                         </HBox>
