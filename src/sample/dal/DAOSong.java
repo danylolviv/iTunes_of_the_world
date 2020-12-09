@@ -3,10 +3,7 @@ package sample.dal;
 import sample.be.Song;
 import sample.exeptions.MrsDalException;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +49,18 @@ public class DAOSong implements DALSong {
 
     @Override
     public void add(Song song) {
+        try(Connection con = dataAccess.getConnection()){
+            String sql = "INSERT INTO Songs (id,title,artist,lenght,path) VALUES (DateTime.UtcNow.Ticks.ToString(),?,?,?,?)";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setString(1, song.getTitle());
+            statement.setString(2, song.getArtist());
+            statement.setInt(3, song.getLenght());
+            statement.setString(3, song.getUriString());
+            statement.executeUpdate();
 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
