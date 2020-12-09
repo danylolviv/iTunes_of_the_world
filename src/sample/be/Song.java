@@ -10,8 +10,10 @@ public class Song {
     private int lenght;
     private List<Playlist> playlists;
 
+
     public Song(int ID, String title, String artist, int lenght, String uriString) {
         this.ID = ID;
+
         this.title = title;
         this.artist = artist;
         this.lenght = lenght;
