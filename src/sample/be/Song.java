@@ -67,4 +67,10 @@ public class Song {
     public void setID(int ID) {
         this.ID = ID;
     }
+
+    @Override
+    public String toString() {
+        return ID + "  " + title + '\t' + artist  ;
+
+    }
 }
