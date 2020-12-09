@@ -10,8 +10,8 @@ import java.io.IOException;
         import java.util.List;
 
 public interface DALSong {
-    List<Song> getAllMovies() ;
-    List<Song> searchForTheMovies(String text);
+    List<Song> getAllSongs() ;
+    List<Song> searchForTheSongs(String text);
 
     void add(Song song);
 
