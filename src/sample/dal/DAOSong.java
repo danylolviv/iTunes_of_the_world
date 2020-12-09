@@ -4,10 +4,9 @@ import sample.be.Song;
 import sample.exeptions.MrsDalException;
 
 import java.util.List;
-<<<<<<< Updated upstream
-=======
+
 import java.util.Scanner;
->>>>>>> Stashed changes
+
 
 public class DAOSong implements DALSong {
 
@@ -41,8 +40,4 @@ public class DAOSong implements DALSong {
         return null;
     }
 }
-<<<<<<< Updated upstream
 
-
-=======
->>>>>>> Stashed changes
