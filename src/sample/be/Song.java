@@ -4,17 +4,18 @@ import java.util.List;
 
 public class Song {
     private String uriString;
+    private int ID;
     private String title;
     private String artist;
     private int lenght;
     private List<Playlist> playlists;
 
-    public Song(String uriString, String title, String artist, int lenght,Playlist plList) {
-        this.uriString = uriString;
+    public Song(int ID, String title, String artist, int lenght, String uriString) {
+        this.ID = ID;
         this.title = title;
         this.artist = artist;
         this.lenght = lenght;
-        this.playlists.add(plList);
+        this.uriString = uriString;
     }
 
     public String getUriString() {
@@ -55,5 +56,13 @@ public class Song {
 
     public void setPlaylists(Playlist plList) {
         this.playlists.add(plList);
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 }
