@@ -37,6 +37,18 @@ public class MainViewController implements Initializable {
         addPlaylistViewStage.show();
     }
 
+    public void handleNewSongbtn(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/view/AddSongView.fxml"));
+        Parent root = loader.load();
+
+        Stage addPlaylistViewStage = new Stage();
+        addPlaylistViewStage.setScene(new Scene(root));
+
+        addPlaylistViewStage.initModality(Modality.WINDOW_MODAL);
+
+        addPlaylistViewStage.show();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
