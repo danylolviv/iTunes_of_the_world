@@ -9,7 +9,7 @@ public class Song {
     private int lenght;
     private List<Playlist> playlists;
 
-    public Song(String uriString, String title, String artist, int lenght,Playlist plList) {
+    public Song(String uriString, String title, String artist, int lenght, Playlist plList) {
         this.uriString = uriString;
         this.title = title;
         this.artist = artist;
