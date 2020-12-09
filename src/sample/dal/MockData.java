@@ -21,8 +21,8 @@ public class MockData implements dataAccessnterface {
     Playlist zori = new Playlist("Zori");
     Playlist pathetic = new Playlist("Pathetic");
 
-    Song s1 = new Song("theSong1", "Kalinka", "Artist 1", 289, zori);
-    Song s2 = new Song("Makaroni", "Hang", "Tifest", 309, zori);
-    Song s3 = new Song("Lasagna", "Uber Eat", "Tifest", 320, pathetic);
+    Song s1 = new Song(1,"theSong1", "Kalinka", 223,  "zori");
+    Song s2 = new Song(2, "Makaroni", "Hang", 432,  "zori");
+    Song s3 = new Song(3,"Lasagna", "Uber Eat", 432,  "pathetic");
 
 }

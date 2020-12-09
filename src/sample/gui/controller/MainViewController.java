@@ -3,16 +3,24 @@ package sample.gui.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import sample.be.Song;
+import sample.gui.models.SongModel;
 
 import java.awt.*;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class MainViewController {
-
+public class MainViewController implements Initializable {
+    public ListView<Song> lstViewSongs;
+    private SongModel songModel;
 
     @FXML
     private Button newPlaylistButton;
@@ -27,5 +35,12 @@ public class MainViewController {
         addPlaylistViewStage.initModality(Modality.WINDOW_MODAL);
 
         addPlaylistViewStage.show();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        songModel = new SongModel();
+        lstViewSongs.setItems(songModel.getAllSongs());
     }
 }
