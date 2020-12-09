@@ -10,5 +10,6 @@
     <orderEntry type="library" name="org.openjfx:javafx-fxml:12-ea+5" level="project" />
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="com.microsoft.sqlserver:mssql-jdbc:9.1.1.jre15-preview" level="project" />
+    <orderEntry type="library" name="com.microsoft.sqlserver:mssql-jdbc:8.4.0.jre14" level="project" />
   </component>
 </module>
