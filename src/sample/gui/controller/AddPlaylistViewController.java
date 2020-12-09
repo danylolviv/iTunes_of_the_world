@@ -11,11 +11,6 @@ import javafx.stage.Stage;
 import sample.be.Playlist;
 import sample.gui.models.PlaylistModel;
 
-/**
- * FXML Controller class
- *
- * @author James
- */
 public class AddPlaylistViewController implements Initializable {
 
     @FXML
@@ -27,9 +22,6 @@ public class AddPlaylistViewController implements Initializable {
     private Playlist playlist;
     private PlaylistModel plModel;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
