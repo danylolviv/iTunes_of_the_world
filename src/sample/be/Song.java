@@ -6,17 +6,18 @@ public class Song {
     private String uriString;
     private int ID;
     private String title;
-    private String artist;
-    private int lenght;
+    private Artist artist;
+    private Genre genre;
+    private int duration;
     private List<Playlist> playlists;
 
 
-    public Song(int ID, String title, String artist, int lenght, String uriString) {
+    public Song(int ID, String title, Artist artist,Genre genre, int duration, String uriString) {
         this.ID = ID;
-
+        this.genre = genre;
         this.title = title;
         this.artist = artist;
-        this.lenght = lenght;
+        this.duration = duration;
         this.uriString = uriString;
     }
 
@@ -36,20 +37,20 @@ public class Song {
         this.title = title;
     }
 
-    public String getArtist() {
+    public Artist getArtist() {
         return artist;
     }
 
-    public void setArtist(String artist) {
+    public void setArtist(Artist artist) {
         this.artist = artist;
     }
 
-    public int getLenght() {
-        return lenght;
+    public int getDuration() {
+        return duration;
     }
 
-    public void setLenght(int lenght) {
-        this.lenght = lenght;
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
     public List<Playlist> getPlaylists() {
@@ -66,6 +67,10 @@ public class Song {
 
     public void setID(int ID) {
         this.ID = ID;
+    }
+
+    public Genre getGenre() {
+        return genre;
     }
 
     @Override
