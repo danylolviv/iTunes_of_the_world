@@ -7,6 +7,7 @@ import java.io.IOException;
 public class MusicPlayer {
     private static Clip audioClip;
     private static AudioInputStream audioStream;
+    private static long clipTimePosition;
 
     public static void play() {
         String audioFilePath = "src/songFiles/xd.wav";
@@ -35,8 +36,21 @@ public class MusicPlayer {
         }
        audioClip.start();
 
+
     }
     public static void stopSong(){
+        clipTimePosition = audioClip.getMicrosecondPosition();
         audioClip.stop();
     }
+
+    public static void resume(){
+       if(clipTimePosition>0) {
+           audioClip.setMicrosecondPosition(clipTimePosition);
+        audioClip.start();
+       }
+        else{
+            play();
+       }
+    }
+
 }

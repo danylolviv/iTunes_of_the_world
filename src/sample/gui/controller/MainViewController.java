@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 public class MainViewController implements Initializable {
     public ListView<Song> lstViewSongs;
     private SongModel songModel;
-    private boolean isSongPlaying;
+    private boolean isSongPlaying = Boolean.parseBoolean(null);
 
     @FXML
     private Button newPlaylistButton;
@@ -59,15 +59,12 @@ public class MainViewController implements Initializable {
 
     public void btnPlayMusic(ActionEvent actionEvent) {
 if(isSongPlaying==false){
-    MusicPlayer.play();
-    isSongPlaying = true;
+MusicPlayer.resume();
+isSongPlaying=true;
 }
-else{
+else {
     MusicPlayer.stopSong();
-    isSongPlaying = false;
+    isSongPlaying=false;
 }
-
     }
-
-
 }
