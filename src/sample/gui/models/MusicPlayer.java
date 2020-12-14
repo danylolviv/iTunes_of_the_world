@@ -9,7 +9,7 @@ public class MusicPlayer {
     private Object audioClip;
 
     public static void play() {
-        String audioFilePath = "C:\\Users\\PC0\\Desktop\\Coding\\xd.wav";
+        String audioFilePath = "/Users/danylolviv/Documents/IdeaProjects/iTunes_of_the_world/src/songFiles/xd.wav";
         File audioFile = new File(audioFilePath);
         AudioInputStream audioStream = null;
         try {
