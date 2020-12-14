@@ -57,13 +57,13 @@ public class DAOSong implements DALSong {
     @Override
     public void add(Song song) {
         try(Connection con = dataAccess.getConnection()){
-            String sql = "INSERT INTO Songs (id,title,artistId,genreId,duration_sec,songUrl) VALUES (DateTime.UtcNow.Ticks.ToString(),?,?,?,?,?)";
+            String sql = "INSERT INTO Songs (id,title,artistId,genreId,songUrl) VALUES (DateTime.UtcNow.Ticks.ToString(),?,?,?,?)";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, song.getTitle());
             statement.setInt(2, song.getArtist().getID());
             statement.setInt(3, song.getGenre().getID());
-            statement.setInt(4, song.getDuration());
-            statement.setString(5, song.getUriString());
+            //statement.setInt(4, song.getDuration());
+            statement.setString(4, song.getUriString());
             statement.executeUpdate();
 
         } catch (SQLException ex) {
