@@ -14,7 +14,7 @@ public class DataAccess {
         dataSource.setServerName("10.176.111.31");
         dataSource.setUser("CSe20B_27");
         dataSource.setPassword("KDgfkyhtfyhO8321749823");
-        dataSource.setDatabaseName("CSe20B_27_Songs");
+        dataSource.setDatabaseName("iTunes_of_the_world");
     }
 
     public Connection getConnection() throws SQLServerException

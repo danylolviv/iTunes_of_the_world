@@ -1,6 +1,9 @@
 package sample.dal;
 
+import sample.be.Artist;
+import sample.be.Genre;
 import sample.be.Song;
+import sample.bll.ArtistGenreManager;
 import sample.exeptions.MrsDalException;
 
 import java.sql.*;
@@ -13,14 +16,16 @@ import java.util.Scanner;
 public class DAOSong implements DALSong {
 
     private static DataAccess dataAccess;
+    private ArtistGenreManager agManager;
     public DAOSong(){
         dataAccess= new DataAccess();
+        agManager = new ArtistGenreManager();
     }
 
 
     @Override
     public List<Song> getAllSongs() {
-        ArrayList<Song> allSongs = new ArrayList<>();
+        ArrayList<Song> songs = new ArrayList<>();
         try (Connection con = dataAccess.getConnection()) {
             String sql = "SELECT * FROM Songs;";
             Statement statement = con.createStatement();
@@ -30,16 +35,17 @@ public class DAOSong implements DALSong {
 
                 int id = rs.getInt("id");
                 String title = rs.getString("title");
-                String artist = rs.getString("artist");
-                Integer length = rs.getInt("length");
-                String filePath = rs.getString("path");
-                Song song = new Song(id, title, artist, length, filePath);
-                allSongs.add(song);
+                //int duration = rs.getInt("duration_sec");
+                int genreId = rs.getInt("genreId");
+                int artistId = rs.getInt("artistId");
+                String songUrl = rs.getString("songUrl");
+                Song song = new Song(id, title, agManager.findArtistByID(artistId), agManager.findGenreByID(genreId), 10, songUrl);
+                songs.add(song);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return allSongs;
+        return songs;
     }
 
 
