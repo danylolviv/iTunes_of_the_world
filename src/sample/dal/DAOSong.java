@@ -35,7 +35,6 @@ public class DAOSong implements DALSong {
 
                 int id = rs.getInt("id");
                 String title = rs.getString("title");
-                //int duration = rs.getInt("duration_sec");
                 int genreId = rs.getInt("genreId");
                 int artistId = rs.getInt("artistId");
                 String songUrl = rs.getString("songUrl");
@@ -62,7 +61,6 @@ public class DAOSong implements DALSong {
             statement.setString(1, song.getTitle());
             statement.setInt(2, song.getArtist().getID());
             statement.setInt(3, song.getGenre().getID());
-            //statement.setInt(4, song.getDuration());
             statement.setString(4, song.getUriString());
             statement.executeUpdate();
 
