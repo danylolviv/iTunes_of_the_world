@@ -52,8 +52,11 @@ public class MainViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        MusicPlayer.play();
         songModel = new SongModel();
         lstViewSongs.setItems(songModel.getAllSongs());
+    }
+
+    public void btnPlayMusic(ActionEvent actionEvent) {
+        MusicPlayer.play();
     }
 }

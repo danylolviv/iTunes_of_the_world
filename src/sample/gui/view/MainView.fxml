@@ -122,7 +122,7 @@
                   </Button>
                </left>
                <center>
-                  <Button mnemonicParsing="false" text="||" BorderPane.alignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#btnPlayMusic" text="||" BorderPane.alignment="CENTER" />
                </center>
                <right>
                   <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="27.0" text="&gt;" BorderPane.alignment="CENTER_RIGHT">
