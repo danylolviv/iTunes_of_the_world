@@ -5,13 +5,13 @@ import java.io.File;
 import java.io.IOException;
 
 public class MusicPlayer {
-
-    private Object audioClip;
+    private static Clip audioClip;
+    private static AudioInputStream audioStream;
 
     public static void play() {
         String audioFilePath = "src/songFiles/xd.wav";
         File audioFile = new File(audioFilePath);
-        AudioInputStream audioStream = null;
+
         try {
             audioStream = AudioSystem.getAudioInputStream(audioFile);
         } catch (UnsupportedAudioFileException e) {
@@ -21,7 +21,6 @@ public class MusicPlayer {
         }
         AudioFormat format = audioStream.getFormat();
         DataLine.Info info = new DataLine.Info(Clip.class, format);
-        Clip audioClip = null;
         try {
             audioClip = (Clip) AudioSystem.getLine(info);
         } catch (LineUnavailableException e) {
@@ -34,11 +33,10 @@ public class MusicPlayer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        audioClip.start();
-
+       audioClip.start();
 
     }
-    public void stop(){
-
+    public static void stopSong(){
+        audioClip.stop();
     }
 }
