@@ -8,8 +8,8 @@ public class PlaylistModel {
 
     private static PlaylistModel instance;
 
-    ObservableList<Playlist> playlists = FXCollections.observableArrayList();
-    ObservableList playlistTitles = FXCollections.observableArrayList();
+    private ObservableList<Playlist> playlists = FXCollections.observableArrayList();
+    private ObservableList playlistTitles = FXCollections.observableArrayList();
 
     public static PlaylistModel getInstance()
     {
@@ -20,8 +20,8 @@ public class PlaylistModel {
         return instance;
     }
 
-    private PlaylistModel()
-    {
+    public PlaylistModel() {
+
     }
 
     public void addPlaylist(Playlist playlist)

@@ -11,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sample.be.Song;
+import sample.gui.models.MusicPlayer;
 import sample.gui.models.SongModel;
 
 import java.awt.*;
@@ -51,7 +52,7 @@ public class MainViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        MusicPlayer.play();
         songModel = new SongModel();
         lstViewSongs.setItems(songModel.getAllSongs());
     }
