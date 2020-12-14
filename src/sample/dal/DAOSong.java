@@ -71,17 +71,32 @@ public class DAOSong implements DALSong {
 
     @Override
     public void update(Song song) throws MrsDalException {
+        try(Connection con = dataAccess.getConnection()){
+            String sql = "UPDATE Songs SET title = ?, artistID = ?, genreID = ?, songUrl = ? WHERE id = ?)";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setString(1, song.getTitle());
+            statement.setInt(2, song.getArtist().getID());
+            statement.setInt(3, song.getGenre().getID());
+            statement.setString(4, song.getUriString());
+            statement.setInt(5, song.getID());
+            statement.executeUpdate();
 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
     public void delete(Song song) throws MrsDalException {
+        try(Connection con = dataAccess.getConnection()){
+            String sql = "DELETE FROM Songs WHERE id = ?)";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setInt(1, song.getID());
+            statement.executeUpdate();
 
-    }
-
-    @Override
-    public Song createSong(int releaseYear, String title, String songTitle, String artist) {
-        return null;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 }
 

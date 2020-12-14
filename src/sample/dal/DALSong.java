@@ -19,10 +19,4 @@ public interface DALSong {
 
     void delete(Song song) throws MrsDalException;
 
-    // Movie getMovieByID(int movieID);
-
-    Song createSong(int releaseYear, String title, String songTitle, String artist) ;
-
-
-
 }
