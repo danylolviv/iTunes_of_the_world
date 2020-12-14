@@ -10,9 +10,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import sample.be.Playlist;
 import sample.be.Song;
-import sample.gui.models.PlaylistModel;
+import sample.gui.models.MusicPlayer;
 import sample.gui.models.SongModel;
 
 import java.awt.*;
@@ -22,13 +21,10 @@ import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable {
     public ListView<Song> lstViewSongs;
-    public ListView<Playlist> lstViewPlaylists;
     private SongModel songModel;
-    private PlaylistModel playlistModel;
 
     @FXML
     private Button newPlaylistButton;
-
 
     public void handleNewPlaylistbtn(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/view/AddPlaylistView.fxml"));
@@ -56,10 +52,8 @@ public class MainViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        MusicPlayer.play();
         songModel = new SongModel();
         lstViewSongs.setItems(songModel.getAllSongs());
-        playlistModel = new PlaylistModel();
-        lstViewPlaylists.setItems(playlistModel.getPlaylists());
     }
 }
