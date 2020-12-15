@@ -110,7 +110,7 @@
    <top>
       <BorderPane prefHeight="80.0" prefWidth="362.0" BorderPane.alignment="CENTER">
          <center>
-            <Label prefHeight="80.0" prefWidth="300.0" text="No song queued" BorderPane.alignment="CENTER" />
+            <Label fx:id="displaySongName" prefHeight="90.0" prefWidth="348.0" text="No song queued" BorderPane.alignment="CENTER" />
          </center>
          <left>
             <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
@@ -150,19 +150,19 @@
             </BorderPane>
          </left>
          <right>
-            <HBox prefHeight="80.0" prefWidth="276.0" BorderPane.alignment="CENTER">
+            <HBox prefHeight="80.0" prefWidth="227.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label prefHeight="24.0" prefWidth="47.0" text="Search:">
+                  <Label prefHeight="24.0" prefWidth="38.0" text="Search:">
                      <HBox.margin>
                         <Insets right="5.0" top="40.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField  onAction="#searchSongs" prefHeight="27.0" prefWidth="99.0" promptText="Type song title">
+                  <TextField prefHeight="25.0" prefWidth="98.0">
                      <HBox.margin>
                         <Insets right="5.0" top="40.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="67.0" text="-O">
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="36.0" text="-O">
                      <HBox.margin>
                         <Insets top="40.0" />
                      </HBox.margin>

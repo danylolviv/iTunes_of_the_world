@@ -32,4 +32,19 @@ public class ArtistGenreManager {
         }
         return null;
     }
+
+    public Artist findArtistByName(String name){
+        for (Artist artist : dalArtist.getAllArtists()){
+            if (artist.getName() == name) return artist;
+        }
+        return null;
+    }
+
+    public Genre findGenreByName(String name){
+        for (Genre genre : dalGenre.getAllGenres()){
+            if (genre.getName() == name) return genre;
+
+        }
+        return null;
+    }
 }

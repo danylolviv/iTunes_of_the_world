@@ -11,8 +11,12 @@ import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sample.be.Song;
+import sample.be.Playlist;
+import sample.dal.DAOSong;
+import sample.dal.DAOPlaylist;
 import sample.gui.models.MusicPlayer;
 import sample.gui.models.SongModel;
+import sample.gui.models.PlaylistModel;
 
 import java.awt.*;
 import java.io.IOException;
@@ -22,8 +26,9 @@ import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable {
     public ListView<Song> lstViewSongs;
-
     private SongModel songModel;
+    private PlaylistModel playlistModel;
+    private boolean isSongPlaying = Boolean.parseBoolean(null);
 
     @FXML
     private TextField searchSongs;
@@ -53,12 +58,6 @@ public class MainViewController implements Initializable {
         addPlaylistViewStage.initModality(Modality.WINDOW_MODAL);
 
         addPlaylistViewStage.show();
-    }
-
-    public void searchSongs(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/view/MainView.fxml"));
-        String text = searchSongs.getText();
-        songModel.searchedSongs(text.toLowerCase());
     }
 
     @Override
