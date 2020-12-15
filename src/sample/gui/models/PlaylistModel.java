@@ -3,7 +3,6 @@ package sample.gui.models;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import sample.be.Playlist;
-import sample.be.Song;
 import sample.bll.PlaylistManager;
 
 

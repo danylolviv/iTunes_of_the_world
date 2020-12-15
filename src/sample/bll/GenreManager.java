@@ -1,6 +1,5 @@
 package sample.bll;
 
-import sample.be.Artist;
 import sample.be.Genre;
 import sample.dal.DALGenre;
 import sample.dal.DAOGenre;

@@ -1,6 +1,7 @@
 package sample.dal;
 
 import sample.be.Playlist;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

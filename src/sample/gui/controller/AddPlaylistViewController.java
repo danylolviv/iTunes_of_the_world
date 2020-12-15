@@ -1,7 +1,5 @@
 package sample.gui.controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,6 +8,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sample.be.Playlist;
 import sample.gui.models.PlaylistModel;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class AddPlaylistViewController implements Initializable {
 

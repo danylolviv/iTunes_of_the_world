@@ -7,16 +7,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import sample.be.Song;
 import sample.be.Playlist;
-import sample.dal.DAOSong;
-import sample.dal.DAOPlaylist;
+import sample.be.Song;
 import sample.gui.models.MusicPlayer;
-import sample.gui.models.SongModel;
 import sample.gui.models.PlaylistModel;
+import sample.gui.models.SongModel;
 
 import java.awt.*;
 import java.io.IOException;
@@ -27,13 +24,8 @@ public class MainViewController implements Initializable {
     public ListView<Song> lstViewSongs;
     public ListView<Playlist> lstViewPlaylists;
     public javafx.scene.control.Label displaySongName;
-
     private SongModel songModel;
-<<<<<<< HEAD
-
-=======
     private PlaylistModel playlistModel;
->>>>>>> parent of 396cdb7... Revert "Merge remote-tracking branch 'origin/main' into main"
     private boolean isSongPlaying = Boolean.parseBoolean(null);
 
     @FXML

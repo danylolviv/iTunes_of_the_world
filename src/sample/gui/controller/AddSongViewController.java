@@ -1,11 +1,5 @@
 package sample.gui.controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-<<<<<<< HEAD
-
-=======
->>>>>>> parent of 396cdb7... Revert "Merge remote-tracking branch 'origin/main' into main"
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,13 +11,12 @@ import javafx.stage.Stage;
 import sample.be.Artist;
 import sample.be.Genre;
 import sample.be.Song;
-<<<<<<< HEAD
 import sample.gui.models.ArtistModel;
 import sample.gui.models.GenreModel;
-=======
-import sample.gui.models.PlaylistModel;
->>>>>>> parent of 396cdb7... Revert "Merge remote-tracking branch 'origin/main' into main"
 import sample.gui.models.SongModel;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class AddSongViewController implements Initializable {
 
@@ -32,13 +25,10 @@ public class AddSongViewController implements Initializable {
     @FXML
     private ChoiceBox<Artist> artistBox;
     @FXML
-<<<<<<< HEAD
     private ChoiceBox<Genre> genreBox;
     @FXML
     private TextField txtDuration;
     @FXML
-=======
->>>>>>> parent of 396cdb7... Revert "Merge remote-tracking branch 'origin/main' into main"
     private TextField txtPath;
     @FXML
     private Button closeButton;
@@ -53,14 +43,10 @@ public class AddSongViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-<<<<<<< HEAD
         artistModel = new ArtistModel();
         artistBox.setItems(artistModel.getAllArtists());
         genreModel = new GenreModel();
         genreBox.setItems(genreModel.getAllGenres());
-=======
-
->>>>>>> parent of 396cdb7... Revert "Merge remote-tracking branch 'origin/main' into main"
     }
 
     @FXML

@@ -1,7 +1,6 @@
 package sample.dal;
 
 import sample.be.Artist;
-import sample.be.Song;
 
 import java.util.List;
 
