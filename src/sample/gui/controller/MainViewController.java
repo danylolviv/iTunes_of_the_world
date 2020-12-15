@@ -97,7 +97,9 @@ public class MainViewController implements Initializable {
             System.out.println("You need to choose song");
         }
         else{
-            lstViewSongs.getSelectionModel().selectNext();
+            lstViewSongs.getSelectionModel().selectPrevious();
+            MusicPlayer.stopSong();
+            MusicPlayer.play(lstViewSongs.getSelectionModel().getSelectedItem().getUriString());
         }
     }
 
@@ -106,7 +108,9 @@ public class MainViewController implements Initializable {
             System.out.println("You need to choose song");
         }
         else{
-            lstViewSongs.getSelectionModel().selectPrevious();
+            lstViewSongs.getSelectionModel().selectNext();
+            MusicPlayer.stopSong();
+            MusicPlayer.play(lstViewSongs.getSelectionModel().getSelectedItem().getUriString());
         }
     }
 }
