@@ -12,12 +12,11 @@ public class Song {
     private List<Playlist> playlists;
 
 
-    public Song(int ID, String title, Artist artist,Genre genre, int duration, String uriString) {
-        this.ID = ID;
+    public Song(int ID, String title, Artist artist, Genre genre, int duration, String uriString) {
+
         this.genre = genre;
         this.title = title;
         this.artist = artist;
-        this.duration = duration;
         this.uriString = uriString;
     }
 
