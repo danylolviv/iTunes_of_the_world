@@ -30,8 +30,6 @@ public class MainViewController implements Initializable {
 
     @FXML
     private Button newPlaylistButton;
-    private int nextSongNumber;
-    private int prevSongNumber;
 
     public void handleNewPlaylistbtn(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/view/AddPlaylistView.fxml"));
@@ -64,7 +62,24 @@ public class MainViewController implements Initializable {
     }
 
     public void btnPlayMusic(ActionEvent actionEvent) {
-        displaySongName.setText(lstViewSongs.getSelectionModel().getSelectedItem().getTitle());
+        if(lstViewSongs.getSelectionModel().isEmpty()){
+            System.out.println("You need to choose song");
+        }
+            else{
+                displaySongName.setText(lstViewSongs.getSelectionModel().getSelectedItem().getTitle());
+
+            if(isSongPlaying==false){
+                MusicPlayer.resume(lstViewSongs.getSelectionModel().getSelectedItem().getUriString());
+                isSongPlaying=true;
+            }
+
+            else {
+                MusicPlayer.stopSong();
+                isSongPlaying=false;
+            }
+        }
+
+    /*
         if(isSongPlaying==false){
             MusicPlayer.resume();
             isSongPlaying=true;
@@ -72,16 +87,32 @@ public class MainViewController implements Initializable {
 
         else {
             MusicPlayer.stopSong();
-             isSongPlaying=false;
-}
+            isSongPlaying=false;
+        }
+    */
+
     }
 
     public void btnPrevSong(ActionEvent actionEvent) {
-        lstViewSongs.getSelectionModel().selectNext();
+
+        if(lstViewSongs.getSelectionModel().isEmpty()){
+            System.out.println("You need to choose song");
+        }
+        else{
+            lstViewSongs.getSelectionModel().selectPrevious();
+            MusicPlayer.stopSong();
+            MusicPlayer.play(lstViewSongs.getSelectionModel().getSelectedItem().getUriString());
+        }
     }
 
     public void btnNextSong(ActionEvent actionEvent) {
-        lstViewSongs.getSelectionModel().selectPrevious();
-
+        if(lstViewSongs.getSelectionModel().isEmpty()){
+            System.out.println("You need to choose song");
+        }
+        else{
+            lstViewSongs.getSelectionModel().selectNext();
+            MusicPlayer.stopSong();
+            MusicPlayer.play(lstViewSongs.getSelectionModel().getSelectedItem().getUriString());
+        }
     }
 }
