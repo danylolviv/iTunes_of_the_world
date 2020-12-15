@@ -35,9 +35,8 @@ public class MusicPlayer {
             e.printStackTrace();
         }
        audioClip.start();
-
-
     }
+
     public static void stopSong(){
         clipTimePosition = audioClip.getMicrosecondPosition();
         audioClip.stop();
@@ -46,11 +45,10 @@ public class MusicPlayer {
     public static void resume(){
        if(clipTimePosition>0) {
            audioClip.setMicrosecondPosition(clipTimePosition);
-        audioClip.start();
+            audioClip.start();
        }
         else{
             play();
        }
     }
-
 }

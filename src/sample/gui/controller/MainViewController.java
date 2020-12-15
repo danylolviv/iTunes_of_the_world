@@ -11,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sample.be.Song;
+import sample.dal.DAOSong;
 import sample.gui.models.MusicPlayer;
 import sample.gui.models.SongModel;
 
@@ -21,11 +22,14 @@ import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable {
     public ListView<Song> lstViewSongs;
+    public javafx.scene.control.Label displaySongName;
     private SongModel songModel;
     private boolean isSongPlaying = Boolean.parseBoolean(null);
 
     @FXML
     private Button newPlaylistButton;
+    private int nextSongNumber;
+    private int prevSongNumber;
 
     public void handleNewPlaylistbtn(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/view/AddPlaylistView.fxml"));
@@ -58,13 +62,24 @@ public class MainViewController implements Initializable {
     }
 
     public void btnPlayMusic(ActionEvent actionEvent) {
-if(isSongPlaying==false){
-MusicPlayer.resume();
-isSongPlaying=true;
+        displaySongName.setText(lstViewSongs.getSelectionModel().getSelectedItem().getTitle());
+        if(isSongPlaying==false){
+            MusicPlayer.resume();
+            isSongPlaying=true;
+        }
+
+        else {
+            MusicPlayer.stopSong();
+             isSongPlaying=false;
 }
-else {
-    MusicPlayer.stopSong();
-    isSongPlaying=false;
-}
+    }
+
+    public void btnPrevSong(ActionEvent actionEvent) {
+        lstViewSongs.getSelectionModel().selectNext();
+    }
+
+    public void btnNextSong(ActionEvent actionEvent) {
+        lstViewSongs.getSelectionModel().selectPrevious();
+
     }
 }
