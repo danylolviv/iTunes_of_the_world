@@ -115,7 +115,7 @@
          <left>
             <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <left>
-                  <Button fx:id="btnPrevSong" mnemonicParsing="false" onAction="#btnPrevSong" text="&lt;" BorderPane.alignment="CENTER">
+                  <Button mnemonicParsing="false" text="&lt;" BorderPane.alignment="CENTER">
                      <BorderPane.margin>
                         <Insets left="50.0" />
                      </BorderPane.margin>
@@ -125,7 +125,7 @@
                   <Button mnemonicParsing="false" onAction="#btnPlayMusic" text="||" BorderPane.alignment="CENTER" />
                </center>
                <right>
-                  <Button fx:id="btnNextSong" mnemonicParsing="false" onAction="#btnNextSong" prefHeight="25.0" prefWidth="27.0" text="&gt;" BorderPane.alignment="CENTER_RIGHT">
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="27.0" text="&gt;" BorderPane.alignment="CENTER_RIGHT">
                      <BorderPane.margin>
                         <Insets right="50.0" />
                      </BorderPane.margin>
