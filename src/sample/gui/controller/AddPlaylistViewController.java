@@ -18,7 +18,6 @@ public class AddPlaylistViewController implements Initializable {
     @FXML
     private TextField txtTitle;
 
-    private PlaylistModel playlistModel= new PlaylistModel();
 
     private Playlist playlist;
     private PlaylistModel plModel;
@@ -26,13 +25,18 @@ public class AddPlaylistViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-
+        plModel = PlaylistModel.getInstance();
     }
 
     @FXML
     private void addPlaylist(ActionEvent event)
     {
+        String name = txtTitle.getText();
 
+        playlist = new Playlist(name);
+        plModel.addPlaylist(playlist);
+        closeWindow();
+        plModel.updatePlaylistView();
 
     }
 

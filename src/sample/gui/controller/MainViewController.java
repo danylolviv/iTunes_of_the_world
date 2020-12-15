@@ -11,12 +11,9 @@ import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sample.be.Song;
-import sample.be.Playlist;
 import sample.dal.DAOSong;
-import sample.dal.DAOPlaylist;
 import sample.gui.models.MusicPlayer;
 import sample.gui.models.SongModel;
-import sample.gui.models.PlaylistModel;
 
 import java.awt.*;
 import java.io.IOException;
@@ -25,10 +22,8 @@ import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable {
     public ListView<Song> lstViewSongs;
-    public ListView<Playlist> lstViewPlaylists;
     public javafx.scene.control.Label displaySongName;
     private SongModel songModel;
-    private PlaylistModel playlistModel;
     private boolean isSongPlaying = Boolean.parseBoolean(null);
 
     @FXML
@@ -62,8 +57,6 @@ public class MainViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         songModel = new SongModel();
         lstViewSongs.setItems(songModel.getAllSongs());
-        playlistModel = new PlaylistModel();
-        lstViewPlaylists.setItems(playlistModel.getPlaylists());
     }
 
     public void btnPlayMusic(ActionEvent actionEvent) {
