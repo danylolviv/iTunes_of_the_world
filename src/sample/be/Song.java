@@ -20,6 +20,12 @@ public class Song {
         this.uriString = uriString;
     }
 
+    @Override
+    public String toString() {
+        return ID + "  " + title + '\t' + artist.getName()  ;
+
+    }
+
     public String getUriString() {
         return uriString;
     }
@@ -72,9 +78,4 @@ public class Song {
         return genre;
     }
 
-    @Override
-    public String toString() {
-        return ID + "  " + title + '\t' + artist.getName()  ;
-
-    }
 }

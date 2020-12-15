@@ -2,8 +2,6 @@ package sample.gui.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.UUID;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sample.be.Playlist;
 import sample.be.Song;
-import sample.bll.ArtistGenreManager;
 import sample.gui.models.PlaylistModel;
 import sample.gui.models.SongModel;
 
@@ -23,10 +20,6 @@ public class AddSongViewController implements Initializable {
     private TextField txtTitle;
     @FXML
     private TextField txtArtist;
-    @FXML
-    private TextField txtGenre;
-    @FXML
-    private TextField txtDuration;
     @FXML
     private TextField txtPath;
     @FXML
@@ -43,7 +36,7 @@ public class AddSongViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        plModel = PlaylistModel.getInstance();
+
     }
 
     @FXML
