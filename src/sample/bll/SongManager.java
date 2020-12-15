@@ -9,18 +9,21 @@ import java.util.List;
 
 public class SongManager {
     private DAOSong daoSong;
+
     public SongManager(){
         daoSong = new DAOSong();
     }
+
     public List<Song> getAllSongs(){
         return daoSong.getAllSongs();
     }
+
     public int getNextId() {
         List<Song> songs = getAllSongs();
         return songs.stream().filter(song -> song.getID() != songs.indexOf(song)).findFirst().map(songs::indexOf).orElse(songs.size());
     }
-    public void addSong(String title, Artist artist, Genre genre, String path){
 
+    public void addSong(String title, Artist artist, Genre genre, String path){
         daoSong.add(new Song(getNextId(),title,artist,genre,20,path));
     }
 }

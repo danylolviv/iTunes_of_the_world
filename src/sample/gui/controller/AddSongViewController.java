@@ -2,19 +2,20 @@ package sample.gui.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.UUID;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import sample.be.Playlist;
+import sample.be.Artist;
+import sample.be.Genre;
 import sample.be.Song;
-import sample.bll.ArtistGenreManager;
-import sample.gui.models.PlaylistModel;
+import sample.gui.models.ArtistModel;
+import sample.gui.models.GenreModel;
 import sample.gui.models.SongModel;
 
 public class AddSongViewController implements Initializable {
@@ -22,9 +23,9 @@ public class AddSongViewController implements Initializable {
     @FXML
     private TextField txtTitle;
     @FXML
-    private TextField txtArtist;
+    private ChoiceBox<Artist> artistBox;
     @FXML
-    private TextField txtGenre;
+    private ChoiceBox<Genre> genreBox;
     @FXML
     private TextField txtDuration;
     @FXML
@@ -33,17 +34,19 @@ public class AddSongViewController implements Initializable {
     private Button closeButton;
 
     private SongModel songModel = new SongModel();
+    private ArtistModel artistModel;
+    private GenreModel genreModel;
 
     private Song song;
     ObservableList<Song> songs = FXCollections.observableArrayList();
 
-    private Playlist playlist;
-    private PlaylistModel plModel;
-
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        plModel = PlaylistModel.getInstance();
+        artistModel = new ArtistModel();
+        artistBox.setItems(artistModel.getAllArtists());
+        genreModel = new GenreModel();
+        genreBox.setItems(genreModel.getAllGenres());
     }
 
     @FXML
@@ -51,9 +54,8 @@ public class AddSongViewController implements Initializable {
     {
         int id = 57;
         String title = txtTitle.getText();
-        String artist = txtArtist.getText();
-        //String genre = txtGenre.getText();
-        String genre = "genre";
+        Artist artist = artistBox.getValue();
+        Genre genre = genreBox.getValue();
         String path = txtPath.getText();
 
         songModel.addSong(title,artist,genre,path);

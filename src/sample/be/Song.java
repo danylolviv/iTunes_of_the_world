@@ -72,9 +72,13 @@ public class Song {
         return genre;
     }
 
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
     @Override
     public String toString() {
-        return ID + "  " + title + '\t' + artist.getName()  ;
+        return ID + "  " + title + "\t\t" + artist.getName() + "\t" + genre.getName();
 
     }
 }

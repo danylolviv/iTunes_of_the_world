@@ -23,7 +23,9 @@ import java.util.ResourceBundle;
 public class MainViewController implements Initializable {
     public ListView<Song> lstViewSongs;
     public javafx.scene.control.Label displaySongName;
+
     private SongModel songModel;
+
     private boolean isSongPlaying = Boolean.parseBoolean(null);
 
     @FXML

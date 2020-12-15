@@ -16,4 +16,9 @@ public class Artist {
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return ID + " " + name;
+    }
 }

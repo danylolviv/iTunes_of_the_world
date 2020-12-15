@@ -1,25 +1,25 @@
 package sample.dal;
 
-import sample.be.Artist;
-import sample.be.Genre;
 import sample.be.Song;
-import sample.bll.ArtistGenreManager;
+import sample.bll.ArtistManager;
+import sample.bll.GenreManager;
 import sample.exeptions.MrsDalException;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.util.Scanner;
-
 
 public class DAOSong implements DALSong {
 
     private static DataAccess dataAccess;
-    private ArtistGenreManager agManager;
+    private ArtistManager artistManager;
+    private GenreManager genreManager;
+
     public DAOSong(){
         dataAccess= new DataAccess();
-        agManager = new ArtistGenreManager();
+        artistManager = new ArtistManager();
+        genreManager = new GenreManager();
     }
 
 
@@ -38,7 +38,7 @@ public class DAOSong implements DALSong {
                 int genreId = rs.getInt("genreId");
                 int artistId = rs.getInt("artistId");
                 String songUrl = rs.getString("songUrl");
-                Song song = new Song(id, title, agManager.findArtistByID(artistId), agManager.findGenreByID(genreId), 10, songUrl);
+                Song song = new Song(id, title, artistManager.findArtistByID(artistId), genreManager.findGenreByID(genreId), 10, songUrl);
                 songs.add(song);
             }
         } catch (SQLException ex) {
@@ -56,7 +56,7 @@ public class DAOSong implements DALSong {
     @Override
     public void add(Song song) {
         try(Connection con = dataAccess.getConnection()){
-            String sql = "INSERT INTO Songs (id,title,artistId,genreId,songUrl) VALUES (DateTime.UtcNow.Ticks.ToString(),?,?,?,?)";
+            String sql = "INSERT INTO Songs (title,artistId,genreId,songUrl) VALUES (?,?,?,?)";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, song.getTitle());
             statement.setInt(2, song.getArtist().getID());
