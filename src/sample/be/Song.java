@@ -20,6 +20,12 @@ public class Song {
         this.uriString = uriString;
     }
 
+    @Override
+    public String toString() {
+        return ID + "  " + title + '\t' + artist.getName()  ;
+
+    }
+
     public String getUriString() {
         return uriString;
     }
@@ -72,6 +78,7 @@ public class Song {
         return genre;
     }
 
+<<<<<<< HEAD
     public void setGenre(Genre genre) {
         this.genre = genre;
     }
@@ -81,4 +88,6 @@ public class Song {
         return ID + "  " + title + "\t\t" + artist.getName() + "\t" + genre.getName();
 
     }
+=======
+>>>>>>> parent of 396cdb7... Revert "Merge remote-tracking branch 'origin/main' into main"
 }
