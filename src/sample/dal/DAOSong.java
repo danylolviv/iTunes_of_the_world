@@ -49,8 +49,14 @@ public class DAOSong implements DALSong {
 
 
     @Override
-    public List<Song> searchForTheSongs(String text) {
-        return null;
+    public List<Song> searchForTheSongs(String searchQuery) {
+            List<Song> foundSongs = new ArrayList<>();
+            for (Song s: getAllSongs()){
+                if(s.getTitle().toString().contains(searchQuery)){
+                    foundSongs.add(s);
+                }
+            }
+            return foundSongs;
     }
 
     @Override

@@ -17,11 +17,16 @@ import sample.gui.models.SongModel;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable {
     public ListView<Song> lstViewSongs;
+
     private SongModel songModel;
+
+    @FXML
+    private TextField searchSongs;
 
     @FXML
     private Button newPlaylistButton;
@@ -48,6 +53,12 @@ public class MainViewController implements Initializable {
         addPlaylistViewStage.initModality(Modality.WINDOW_MODAL);
 
         addPlaylistViewStage.show();
+    }
+
+    public void searchSongs(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/view/MainView.fxml"));
+        String text = searchSongs.getText();
+        songModel.searchedSongs(text.toLowerCase());
     }
 
     @Override

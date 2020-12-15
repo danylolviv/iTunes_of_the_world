@@ -13,11 +13,21 @@ public class SongModel {
         songMenager = new SongManager();
         songs = FXCollections.observableArrayList();
         songs.addAll(songMenager.getAllSongs());
+
     }
 
     public ObservableList<Song> getAllSongs() {
         return songs;
+    }
 
+    public void searchedSongs(String searchQuery){
+        System.out.println(searchQuery);
+//                try{
+//            songs.removeAll();
+//            songs.addAll(songMenager.searchTheSongs(searchQuery));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
 }
