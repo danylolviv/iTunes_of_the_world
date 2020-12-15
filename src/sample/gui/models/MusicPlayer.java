@@ -8,9 +8,11 @@ public class MusicPlayer {
     private static Clip audioClip;
     private static AudioInputStream audioStream;
     private static long clipTimePosition;
+    private static String path;
 
-    public static void play() {
-        String audioFilePath = "src/songFiles/xd.wav";
+
+    public static void play(String path) {
+        String audioFilePath = path;
         File audioFile = new File(audioFilePath);
 
         try {
@@ -42,13 +44,13 @@ public class MusicPlayer {
         audioClip.stop();
     }
 
-    public static void resume(){
+    public static void resume(String path){
        if(clipTimePosition>0) {
            audioClip.setMicrosecondPosition(clipTimePosition);
             audioClip.start();
        }
         else{
-            play();
+            play(path);
        }
     }
 }
