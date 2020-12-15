@@ -60,13 +60,13 @@ public class MainViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         songModel = new SongModel();
-        lstViewSongs.setItems(songModel.getAllSongs());
+        refreshSongs();
     }
 
     public void btnPlayMusic(ActionEvent actionEvent) {
         displaySongName.setText(lstViewSongs.getSelectionModel().getSelectedItem().getTitle());
         if(isSongPlaying==false){
-            MusicPlayer.resume();
+            MusicPlayer.resume(lstViewSongs.getSelectionModel().getSelectedItem().getUriString());
             isSongPlaying=true;
         }
 
@@ -83,5 +83,9 @@ public class MainViewController implements Initializable {
     public void btnNextSong(ActionEvent actionEvent) {
         lstViewSongs.getSelectionModel().selectPrevious();
 
+    }
+
+    public void refreshSongs(){
+        lstViewSongs.setItems(songModel.getAllSongs());
     }
 }

@@ -59,6 +59,7 @@ public class AddSongViewController implements Initializable {
         String path = txtPath.getText();
 
         songModel.addSong(title,artist,genre,path);
+
         closeWindow();
 
     }
@@ -67,6 +68,7 @@ public class AddSongViewController implements Initializable {
     private void closeWindow()
     {
         Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.
         stage.close();
     }
 
