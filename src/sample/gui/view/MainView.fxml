@@ -81,7 +81,7 @@
             <VBox prefHeight="377.0" prefWidth="284.0" spacing="5.0">
                <children>
                   <Label text="Songs" />
-                  <ListView fx:id="lstViewSongs" prefHeight="321.0" prefWidth="283.0" />
+                  <ListView fx:id="lstViewSongs" onMouseClicked="#btnChooseSong" prefHeight="321.0" prefWidth="283.0" />
                   <BorderPane prefHeight="98.0" prefWidth="307.0">
                      <right>
                         <HBox prefHeight="64.0" prefWidth="54.0" BorderPane.alignment="CENTER">

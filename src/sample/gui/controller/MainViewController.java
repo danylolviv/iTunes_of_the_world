@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sample.be.Playlist;
@@ -64,35 +65,17 @@ public class MainViewController implements Initializable {
     }
 
     public void btnPlayMusic(ActionEvent actionEvent) {
-        if(lstViewSongs.getSelectionModel().isEmpty()){
-            System.out.println("You need to choose song");
-        }
-            else{
-                displaySongName.setText(lstViewSongs.getSelectionModel().getSelectedItem().getTitle());
 
-            if(isSongPlaying==false){
-                MusicPlayer.resume(lstViewSongs.getSelectionModel().getSelectedItem().getUriString());
-                isSongPlaying=true;
-            }
+        if(isSongPlaying==true){
 
-            else {
-                MusicPlayer.stopSong();
-                isSongPlaying=false;
-            }
-        }
-
-    /*
-        if(isSongPlaying==false){
-            MusicPlayer.resume();
-            isSongPlaying=true;
-        }
-
-        else {
             MusicPlayer.stopSong();
             isSongPlaying=false;
         }
-    */
 
+        else {
+            MusicPlayer.resume(lstViewSongs.getSelectionModel().getSelectedItem().getUriString());
+            isSongPlaying=true;
+        }
     }
 
     public void btnPrevSong(ActionEvent actionEvent) {
@@ -104,6 +87,7 @@ public class MainViewController implements Initializable {
             lstViewSongs.getSelectionModel().selectPrevious();
             MusicPlayer.stopSong();
             MusicPlayer.play(lstViewSongs.getSelectionModel().getSelectedItem().getUriString());
+            displaySongName.setText(lstViewSongs.getSelectionModel().getSelectedItem().getTitle());
         }
     }
 
@@ -115,6 +99,19 @@ public class MainViewController implements Initializable {
             lstViewSongs.getSelectionModel().selectNext();
             MusicPlayer.stopSong();
             MusicPlayer.play(lstViewSongs.getSelectionModel().getSelectedItem().getUriString());
+            displaySongName.setText(lstViewSongs.getSelectionModel().getSelectedItem().getTitle());
         }
     }
+
+    public void btnChooseSong(MouseEvent mouseEvent) {
+        if(isSongPlaying==true){
+            MusicPlayer.stopSong();
+            isSongPlaying= false;
+        }else {
+            MusicPlayer.play(lstViewSongs.getSelectionModel().getSelectedItem().getUriString());
+            isSongPlaying=true;
+        }
+        displaySongName.setText(lstViewSongs.getSelectionModel().getSelectedItem().getTitle());
+    }
+
 }

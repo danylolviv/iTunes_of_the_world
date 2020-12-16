@@ -1,6 +1,7 @@
 package sample.bll;
 
 import sample.be.Playlist;
+import sample.be.Song;
 import sample.dal.DAOPlaylist;
 
 import java.util.List;
@@ -21,3 +22,4 @@ public class PlaylistManager {
         return daoPlaylist.getAllPlaylists();
     }
 }
+
