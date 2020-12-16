@@ -12,7 +12,7 @@ public class Playlist implements Serializable
     private List<Song> songList;
     private int numSongs;
 
-    public Playlist(int id, String title)
+    public Playlist( String title)
     {
         this.title = title;
         songList = new ArrayList<Song>();

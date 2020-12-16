@@ -21,4 +21,7 @@ public class PlaylistModel {
         return playlists;
     }
 
+    public void addPlaylist(String title) {
+        playlistManager.addPlaylist(title);
+    }
 }

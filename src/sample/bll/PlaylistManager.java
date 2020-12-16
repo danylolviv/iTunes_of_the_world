@@ -5,6 +5,7 @@ import sample.be.Song;
 import sample.dal.DAOPlaylist;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 
 public class PlaylistManager {
@@ -20,6 +21,10 @@ public class PlaylistManager {
 
     public List<Playlist> getAllPlaylists(){
         return daoPlaylist.getAllPlaylists();
+    }
+
+    public void addPlaylist(String title) {
+        daoPlaylist.add(new Playlist(title));
     }
 }
 

@@ -6,6 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import sample.be.Artist;
+import sample.be.Genre;
 import sample.be.Playlist;
 import sample.gui.models.PlaylistModel;
 
@@ -33,7 +35,10 @@ public class AddPlaylistViewController implements Initializable {
     @FXML
     private void addPlaylist(ActionEvent event)
     {
+       String title = txtTitle.getText();
 
+        playlistModel.addPlaylist(title);
+        closeWindow();
 
     }
 
