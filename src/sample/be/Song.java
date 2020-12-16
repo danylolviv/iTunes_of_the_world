@@ -78,7 +78,7 @@ public class Song {
 
     @Override
     public String toString() {
-        return ID + "  " + title + "\t\t" + artist.getName() + "\t" + genre.getName();
+        return title + " - " + artist.getName() + " - " + genre.getName();
 
     }
 }
