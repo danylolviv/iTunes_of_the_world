@@ -157,7 +157,7 @@
                         <Insets right="5.0" top="40.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField prefHeight="25.0" prefWidth="98.0">
+                  <TextField fx:id="typeField"  prefHeight="25.0" prefWidth="98.0">
                      <HBox.margin>
                         <Insets right="5.0" top="40.0" />
                      </HBox.margin>

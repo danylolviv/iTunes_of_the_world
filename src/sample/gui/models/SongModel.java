@@ -9,6 +9,10 @@ import sample.bll.ArtistManager;
 import sample.bll.GenreManager;
 import sample.bll.SongManager;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 public class SongModel {
     private ArtistManager artistManager;
     private GenreManager genreManager;
@@ -27,14 +31,24 @@ public class SongModel {
         return songs;
     }
 
-    public void searchedSongs(String searchQuery){
+    public ObservableList<Song> searchedSongs(String searchQuery){
         System.out.println(searchQuery);
-//                try{
-//            songs.removeAll();
-//            songs.addAll(songMenager.searchTheSongs(searchQuery));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        ObservableList<Song> serchedSongs;
+        serchedSongs = FXCollections.observableArrayList();
+        if (songs.size() >= 1){
+            for(Song s: songs){
+                if (s.getTitle().contains(searchQuery.toLowerCase(Locale.ROOT))){
+                    serchedSongs.add(s);
+                }
+            }
+        }
+        else{
+            Genre gNull = new Genre(999,"null");
+            Artist aNull = new Artist(999, "null");
+            Song sNull = new Song(76394, "null", aNull , gNull,0, "hello null" );
+            serchedSongs.add(sNull);
+        }
+    return serchedSongs;
     }
 
     public void addSong(String title, Artist artist, Genre genre, String path) {

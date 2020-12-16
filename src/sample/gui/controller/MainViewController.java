@@ -12,6 +12,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sample.be.Playlist;
 import sample.be.Song;
+import sample.bll.SongManager;
 import sample.gui.models.MusicPlayer;
 import sample.gui.models.PlaylistModel;
 import sample.gui.models.SongModel;
@@ -28,6 +29,9 @@ public class MainViewController implements Initializable {
     private SongModel songModel;
     private PlaylistModel playlistModel;
     private boolean isSongPlaying = Boolean.parseBoolean(null);
+
+    @FXML
+    private javafx.scene.control.TextField typeField;
 
     @FXML
     private Button newPlaylistButton;
@@ -56,12 +60,6 @@ public class MainViewController implements Initializable {
         addPlaylistViewStage.show();
     }
 
-    public void searchSongs(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/view/MainView.fxml"));
-//        String text = searchSongs.getText();
-        String text = "boo";
-        songModel.searchedSongs(text.toLowerCase());
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -69,6 +67,12 @@ public class MainViewController implements Initializable {
         lstViewSongs.setItems(songModel.getAllSongs());
         playlistModel = new PlaylistModel();
         lstViewPlaylists.setItems(playlistModel.getPlaylists());
+
+
+
+        typeField.textProperty().addListener((observableValue, s, t1) -> {
+            lstViewSongs.setItems(songModel.searchedSongs(t1));
+        });
     }
 
     public void btnPlayMusic(ActionEvent actionEvent) {
