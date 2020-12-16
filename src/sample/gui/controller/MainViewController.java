@@ -56,6 +56,13 @@ public class MainViewController implements Initializable {
         addPlaylistViewStage.show();
     }
 
+    public void searchSongs(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/view/MainView.fxml"));
+//        String text = searchSongs.getText();
+        String text = "boo";
+        songModel.searchedSongs(text.toLowerCase());
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         songModel = new SongModel();

@@ -27,6 +27,16 @@ public class SongModel {
         return songs;
     }
 
+    public void searchedSongs(String searchQuery){
+        System.out.println(searchQuery);
+//                try{
+//            songs.removeAll();
+//            songs.addAll(songMenager.searchTheSongs(searchQuery));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+    }
+
     public void addSong(String title, Artist artist, Genre genre, String path) {
         songManager.addSong(title, artist, genre,path);
 

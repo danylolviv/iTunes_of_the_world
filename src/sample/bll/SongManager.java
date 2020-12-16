@@ -18,6 +18,8 @@ public class SongManager {
         return daoSong.getAllSongs();
     }
 
+    public List<Song> searchTheSongs(String searchQuery){ return daoSong.searchForTheSongs(searchQuery); }
+
     public int getNextId() {
         List<Song> songs = getAllSongs();
         return songs.stream().filter(song -> song.getID() != songs.indexOf(song)).findFirst().map(songs::indexOf).orElse(songs.size());
