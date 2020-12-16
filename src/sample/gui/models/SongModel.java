@@ -35,19 +35,16 @@ public class SongModel {
         System.out.println(searchQuery);
         ObservableList<Song> serchedSongs;
         serchedSongs = FXCollections.observableArrayList();
-        if (songs.size() >= 1){
+
             for(Song s: songs){
-                if (s.getTitle().contains(searchQuery.toLowerCase(Locale.ROOT))){
+                String artist = s.getArtist().getName().toLowerCase();
+                String genre = s.getGenre().getName().toLowerCase();
+                String title = s.getTitle().toLowerCase();
+                String query = searchQuery.toLowerCase();
+                if (title.contains(query)||artist.contains(query)||genre.contains(query)){
                     serchedSongs.add(s);
                 }
             }
-        }
-        else{
-            Genre gNull = new Genre(999,"null");
-            Artist aNull = new Artist(999, "null");
-            Song sNull = new Song(76394, "null", aNull , gNull,0, "hello null" );
-            serchedSongs.add(sNull);
-        }
     return serchedSongs;
     }
 
