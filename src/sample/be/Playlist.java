@@ -20,7 +20,7 @@ public class Playlist implements Serializable
 
     @Override
     public String toString() {
-        return "  " + title + '\t';
+        return title;
 
     }
 
