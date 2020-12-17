@@ -1,9 +1,8 @@
 package sample.bll;
 
-import sample.be.Artist;
-import sample.be.Genre;
 import sample.be.Song;
 import sample.dal.DAOSong;
+import sample.exeptions.MrsDalException;
 
 import java.util.List;
 
@@ -22,10 +21,14 @@ public class SongManager {
 
     public int getNextId() {
         List<Song> songs = getAllSongs();
-        return songs.stream().filter(song -> song.getID() != songs.indexOf(song)).findFirst().map(songs::indexOf).orElse(songs.size());
+        return songs.stream().filter(song -> song.getId() != songs.indexOf(song)).findFirst().map(songs::indexOf).orElse(songs.size());
     }
 
-    public void addSong(String title, Artist artist, Genre genre, String path){
-        daoSong.add(new Song(getNextId(),title,artist,genre,20,path));
+    public void addSong(Song song){
+        daoSong.add(song);
+    }
+
+    public void deleteSong(Song song) throws MrsDalException {
+        daoSong.delete(song);
     }
 }

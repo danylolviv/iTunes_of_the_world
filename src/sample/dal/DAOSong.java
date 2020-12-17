@@ -27,7 +27,8 @@ public class DAOSong implements DALSong {
     public List<Song> getAllSongs() {
         ArrayList<Song> songs = new ArrayList<>();
         try (Connection con = dataAccess.getConnection()) {
-            String sql = "SELECT * FROM Songs;";
+            String sql = "SELECT Songs.id,title,Genres.genre,Artist.artist,songUrl FROM Songs JOIN Genres ON Songs.genreId=Genres.id " +
+                    "JOIN Artist ON Songs.artistId=Artist.id;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
 
@@ -35,10 +36,10 @@ public class DAOSong implements DALSong {
 
                 int id = rs.getInt("id");
                 String title = rs.getString("title");
-                int genreId = rs.getInt("genreId");
-                int artistId = rs.getInt("artistId");
+                String artist = rs.getString("artist");
+                String genre = rs.getString("genre");
                 String songUrl = rs.getString("songUrl");
-                Song song = new Song(id, title, artistManager.findArtistByID(artistId), genreManager.findGenreByID(genreId), 10, songUrl);
+                Song song = new Song(id, title, artist, genre, 10, songUrl);
                 songs.add(song);
             }
         } catch (SQLException ex) {
@@ -64,11 +65,11 @@ public class DAOSong implements DALSong {
     @Override
     public void add(Song song) {
         try(Connection con = dataAccess.getConnection()){
-            String sql = "INSERT INTO Songs (title,artistId,genreId,songUrl) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO Songs (title,artistId,genreId,songUrl) VALUES (?,(SELECT id FROM Artist WHERE artist=?),(SELECT id FROM Genres WHERE genre=?),?)";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, song.getTitle());
-            statement.setInt(2, song.getArtist().getID());
-            statement.setInt(3, song.getGenre().getID());
+            statement.setString(2, song.getArtist());
+            statement.setString(3, song.getGenre());
             statement.setString(4, song.getUriString());
             statement.executeUpdate();
 
@@ -80,13 +81,13 @@ public class DAOSong implements DALSong {
     @Override
     public void update(Song song) throws MrsDalException {
         try(Connection con = dataAccess.getConnection()){
-            String sql = "UPDATE Songs SET title = ?, artistID = ?, genreID = ?, songUrl = ? WHERE id = ?)";
+            String sql = "UPDATE Songs SET title = ?, artistID = (SELECT id FROM Artist WHERE artist=?), genreID = (SELECT id FROM Genres WHERE genre=?), songUrl = ? WHERE id = ?)";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, song.getTitle());
-            statement.setInt(2, song.getArtist().getID());
-            statement.setInt(3, song.getGenre().getID());
+            statement.setString(2, song.getArtist());
+            statement.setString(3, song.getGenre());
             statement.setString(4, song.getUriString());
-            statement.setInt(5, song.getID());
+            statement.setInt(5, song.getId());
             statement.executeUpdate();
 
         } catch (SQLException ex) {
@@ -97,9 +98,9 @@ public class DAOSong implements DALSong {
     @Override
     public void delete(Song song) throws MrsDalException {
         try(Connection con = dataAccess.getConnection()){
-            String sql = "DELETE FROM Songs WHERE id = ?)";
+            String sql = "DELETE FROM Songs WHERE id = ?";
             PreparedStatement statement = con.prepareStatement(sql);
-            statement.setInt(1, song.getID());
+            statement.setInt(1, song.getId());
             statement.executeUpdate();
 
         } catch (SQLException ex) {

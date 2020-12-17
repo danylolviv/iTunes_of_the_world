@@ -17,7 +17,7 @@
             <VBox prefHeight="377.0" prefWidth="196.0" spacing="5.0">
                <children>
                   <Label text="Playlists" />
-                  <ListView fx:id="lstViewPlaylists" prefHeight="331.0" prefWidth="162.0">
+                  <ListView fx:id="lstViewPlaylists" onMouseClicked="#playlistSelect" prefHeight="331.0" prefWidth="162.0">
                      <VBox.margin>
                         <Insets right="10.0" />
                      </VBox.margin>
@@ -47,7 +47,7 @@
             <VBox prefHeight="377.0" prefWidth="249.0" spacing="5.0">
                <children>
                   <Label text="Songs on Playlist" />
-                  <ListView prefHeight="308.0" prefWidth="248.0" />
+                  <ListView fx:id="lstViewPlaylistSongs" prefHeight="308.0" prefWidth="248.0" />
                   <BorderPane prefHeight="82.0" prefWidth="151.0">
                      <center>
                         <HBox prefHeight="68.0" prefWidth="0.0" BorderPane.alignment="CENTER">
@@ -60,7 +60,7 @@
                      <right>
                         <HBox prefHeight="62.0" prefWidth="61.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button mnemonicParsing="false" text="Remove" />
+                              <Button mnemonicParsing="false" onAction="#savePlaylist" text="Save" />
                            </children>
                         </HBox>
                      </right>
@@ -72,7 +72,7 @@
             </VBox>
             <VBox prefHeight="377.0" prefWidth="51.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="48.0" text="&lt;" />
+                  <Button fx:id="btnPlaylistSongAddRemove" mnemonicParsing="false" onAction="#addRemovePlaylistSong" prefHeight="25.0" prefWidth="48.0" text="&lt;" />
                </children>
                <padding>
                   <Insets left="5.0" right="5.0" top="50.0" />
@@ -86,7 +86,7 @@
                      <right>
                         <HBox prefHeight="64.0" prefWidth="54.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button mnemonicParsing="false" text="Delete" />
+                              <Button mnemonicParsing="false" onAction="#btnDeleteSong" text="Delete" />
                            </children>
                         </HBox>
                      </right>
@@ -157,7 +157,7 @@
                         <Insets right="5.0" top="40.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="typeField"  prefHeight="25.0" prefWidth="98.0">
+                  <TextField fx:id="typeField" prefHeight="25.0" prefWidth="98.0">
                      <HBox.margin>
                         <Insets right="5.0" top="40.0" />
                      </HBox.margin>

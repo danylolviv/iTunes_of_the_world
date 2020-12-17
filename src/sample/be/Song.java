@@ -4,16 +4,16 @@ import java.util.List;
 
 public class Song {
     private String uriString;
-    private int ID;
+    private int id;
     private String title;
-    private Artist artist;
-    private Genre genre;
+    private String artist;
+    private String genre;
     private int duration;
     private List<Playlist> playlists;
 
 
-    public Song(int ID, String title, Artist artist, Genre genre, int duration, String uriString) {
-
+    public Song(int id, String title, String artist, String genre, int duration, String uriString) {
+        this.id = id;
         this.genre = genre;
         this.title = title;
         this.artist = artist;
@@ -36,11 +36,11 @@ public class Song {
         this.title = title;
     }
 
-    public Artist getArtist() {
+    public String getArtist() {
         return artist;
     }
 
-    public void setArtist(Artist artist) {
+    public void setArtist(String artist) {
         this.artist = artist;
     }
 
@@ -60,25 +60,25 @@ public class Song {
         this.playlists.add(plList);
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public Genre getGenre() {
+    public String getGenre() {
         return genre;
     }
 
-    public void setGenre(Genre genre) {
+    public void setGenre(String genre) {
         this.genre = genre;
     }
 
     @Override
     public String toString() {
-        return title + " - " + artist.getName() + " - " + genre.getName();
+        return title + " - " + artist + " - " + genre;
 
     }
 }

@@ -13,22 +13,6 @@ public class GenreManager {
         dalGenre = new DAOGenre();
     }
 
-
-    public Genre findGenreByID(int id){
-        for (Genre genre : dalGenre.getAllGenres()){
-            if (genre.getID() == id) return genre;
-        }
-        return null;
-    }
-
-    public Genre findGenreByName(String name){
-        for (Genre genre : dalGenre.getAllGenres()){
-            if (genre.getName() == name) return genre;
-
-        }
-        return null;
-    }
-
     public List<Genre> getAllGenres(){
         return dalGenre.getAllGenres();
     }

@@ -12,15 +12,15 @@ public class Playlist implements Serializable
     private List<Song> songList;
     private int numSongs;
 
-    public Playlist( String title)
+    public Playlist(int id, String title)
     {
+        this.id = id;
         this.title = title;
-        songList = new ArrayList<Song>();
     }
 
     @Override
     public String toString() {
-        return title;
+        return id + " " + title;
 
     }
 

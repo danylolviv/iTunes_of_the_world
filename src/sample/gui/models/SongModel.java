@@ -8,6 +8,7 @@ import sample.be.Song;
 import sample.bll.ArtistManager;
 import sample.bll.GenreManager;
 import sample.bll.SongManager;
+import sample.exeptions.MrsDalException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,24 +34,28 @@ public class SongModel {
 
     public ObservableList<Song> searchedSongs(String searchQuery){
         System.out.println(searchQuery);
-        ObservableList<Song> serchedSongs;
-        serchedSongs = FXCollections.observableArrayList();
+        ObservableList<Song> searchedSongs;
+        searchedSongs = FXCollections.observableArrayList();
 
             for(Song s: songs){
-                String artist = s.getArtist().getName().toLowerCase();
-                String genre = s.getGenre().getName().toLowerCase();
+                String artist = s.getArtist().toLowerCase();
+                String genre = s.getGenre().toLowerCase();
                 String title = s.getTitle().toLowerCase();
                 String query = searchQuery.toLowerCase();
                 if (title.contains(query)||artist.contains(query)||genre.contains(query)){
-                    serchedSongs.add(s);
+                    searchedSongs.add(s);
                 }
             }
-    return serchedSongs;
+    return searchedSongs;
     }
 
-    public void addSong(String title, Artist artist, Genre genre, String path) {
-        songManager.addSong(title, artist, genre,path);
+    public void addSong(String title, String artist, String genre, String path) {
+        songManager.addSong(new Song(1,title,artist,genre,10,path));
 
     }
 
+    public void deleteSong(Song song) throws MrsDalException {
+        songManager.deleteSong(song);
+        songs.remove(song);
+    }
 }

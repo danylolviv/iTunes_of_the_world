@@ -54,13 +54,12 @@ public class AddSongViewController implements Initializable {
     {
         int id = 57;
         String title = txtTitle.getText();
-        Artist artist = artistBox.getValue();
-        Genre genre = genreBox.getValue();
+        String artist = artistBox.getValue().getName();
+        String genre = genreBox.getValue().getName();
         String path = txtPath.getText();
 
         songModel.addSong(title,artist,genre,path);
         closeWindow();
-
     }
 
     @FXML
@@ -69,5 +68,4 @@ public class AddSongViewController implements Initializable {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
-
 }
