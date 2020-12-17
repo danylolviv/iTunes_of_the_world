@@ -28,6 +28,11 @@ public class SongModel {
         songs.addAll(songManager.getAllSongs());
     }
 
+    public void updateSongList(){
+        songs = FXCollections.observableArrayList();
+        songs.addAll(songManager.getAllSongs());
+    }
+
     public ObservableList<Song> getAllSongs() {
         return songs;
     }
