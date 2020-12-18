@@ -11,8 +11,6 @@ import java.util.List;
 
 
 public class DAOPlaylistSong implements DALPlaylistSong {
-    private final int SHIFT_ORDER_UP = 1;
-    private final int SHIFT_ORDER_DOWN = -1;
 
     private static DataAccess dataAccess;
     private ArtistManager artistManager;
@@ -71,7 +69,7 @@ public class DAOPlaylistSong implements DALPlaylistSong {
     @Override
     public void update(PlaylistSong playlistSong,int shiftDirection) throws MrsDalException {
         try(Connection con = dataAccess.getConnection()){
-            String sql = "UPDATE Song_Playlist_Position SET songPosition = ? WHERE playlistId = ?, songId = ?, songPosition = ?";
+            String sql = "UPDATE Song_Playlist_Position SET songPosition = ? WHERE playlistId = ? AND songId = ? AND songPosition = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1, playlistSong.getSongPosition() + shiftDirection);
             statement.setInt(2, playlistSong.getPlaylistID());

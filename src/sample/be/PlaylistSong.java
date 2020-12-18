@@ -24,6 +24,10 @@ public class PlaylistSong extends Song{
         return songPosition;
     }
 
+    public void setSongPosition(int songPosition) {
+        this.songPosition = songPosition;
+    }
+
     @Override
     public String toString() {
         return songPosition + "# - " + super.toString();

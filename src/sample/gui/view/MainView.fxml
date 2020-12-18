@@ -53,8 +53,8 @@
                      <center>
                         <HBox prefHeight="68.0" prefWidth="0.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button mnemonicParsing="false" text="▲" />
-                              <Button mnemonicParsing="false" text="▼" />
+                              <Button mnemonicParsing="false" onAction="#btnPlaylistSongUp" text="▲" />
+                              <Button mnemonicParsing="false" onAction="#btnPlaylistSongDown" text="▼" />
                            </children>
                         </HBox>
                      </center>
@@ -122,10 +122,13 @@
                   </Button>
                </left>
                <center>
-                  <Button mnemonicParsing="false" onAction="#btnPlayMusic" text="||" BorderPane.alignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#btnPlayMusic" text="||" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
                </center>
                <right>
-                  <Button fx:id="btnNextSong" mnemonicParsing="false" onAction="#btnNextSong" prefHeight="25.0" prefWidth="27.0" text="&gt;" BorderPane.alignment="CENTER_RIGHT">
+                  <Button fx:id="btnNextSong" mnemonicParsing="false" onAction="#btnNextSong" prefHeight="25.0" prefWidth="28.0" text="&gt;" BorderPane.alignment="CENTER_RIGHT">
                      <BorderPane.margin>
                         <Insets right="50.0" />
                      </BorderPane.margin>

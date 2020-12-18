@@ -24,7 +24,12 @@ public class PlaylistSongManager {
         daoPlaylistSong.add(playlistSong);
     }
 
-    public  void deletePlaylistSong(PlaylistSong playlistSong) throws MrsDalException {
+    public void deletePlaylistSong(PlaylistSong playlistSong) throws MrsDalException {
         daoPlaylistSong.delete(playlistSong);
     }
+
+    public void updatePlaylistSong(PlaylistSong playlistSong,int shiftDirection) throws MrsDalException {
+        daoPlaylistSong.update(playlistSong,shiftDirection);
+    }
+
 }

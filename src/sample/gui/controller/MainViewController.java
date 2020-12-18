@@ -143,14 +143,17 @@ public class MainViewController implements Initializable {
             try {
                 //remove the song
                 playlistSongModel.deletePlaylistSong(lstViewPlaylistSongs.getSelectionModel().getSelectedItem());
+                //select the song above
+                lstViewPlaylistSongs.getSelectionModel().selectPrevious();
                 //refresh the list
-                lstViewPlaylistSongs.setItems(playlistSongModel.getSongsInPlaylist(lstViewPlaylists.getSelectionModel().getSelectedItem().getId()));
+                refreshLstPlaylistSongs();
             }
             catch (MrsDalException mrsDalException){
+                mrsDalException.printStackTrace();
                 alertDALexception.showAndWait();
             }
         }
-        else{
+        if(!lstViewSongs.getSelectionModel().isEmpty() && lstViewPlaylistSongs.getSelectionModel().isEmpty()){
             Song selectedSong = lstViewSongs.getSelectionModel().getSelectedItem();
             Playlist selectedPlaylist = lstViewPlaylists.getSelectionModel().getSelectedItem();
             playlistSongModel.addPlaylistSong(new PlaylistSong(selectedSong,selectedPlaylist.getId(),playlistSongModel.findNextSongPosition(selectedPlaylist.getId())));
@@ -158,17 +161,21 @@ public class MainViewController implements Initializable {
         }
     }
 
+
+
     public void playlistSelect(MouseEvent mouseEvent){
         lstViewPlaylistSongs.getSelectionModel().clearSelection();
         if(lstViewSongs.getSelectionModel().isEmpty()) btnPlaylistSongAddRemove.setVisible(false);
-        lstViewPlaylistSongs.setItems(playlistSongModel.getSongsInPlaylist(lstViewPlaylists.getSelectionModel().getSelectedItem().getId()));
+        refreshLstPlaylistSongs();
     }
 
     public void playlistSongSelect(MouseEvent mouseEvent){
-        lstViewSongs.getSelectionModel().clearSelection();
-        displaySongName.setText(lstViewPlaylistSongs.getSelectionModel().getSelectedItem().getTitle());
-        btnPlaylistSongAddRemove.setText("X");
-        btnPlaylistSongAddRemove.setVisible(true);
+        if(!lstViewPlaylistSongs.getSelectionModel().isEmpty()){
+            lstViewSongs.getSelectionModel().clearSelection();
+            displaySongName.setText(lstViewPlaylistSongs.getSelectionModel().getSelectedItem().getTitle());
+            btnPlaylistSongAddRemove.setText("X");
+            btnPlaylistSongAddRemove.setVisible(true);
+        }
     }
 
     public void songSelect(MouseEvent mouseEvent) {
@@ -186,7 +193,43 @@ public class MainViewController implements Initializable {
         }
     }
 
-    public void savePlaylist(ActionEvent actionEvent){
+    public void btnPlaylistSongUp(ActionEvent actionEvent){
+        if(lstViewPlaylistSongs.getSelectionModel().getSelectedIndex() > 0) {
+            PlaylistSong selectedPlaylistSong = lstViewPlaylistSongs.getSelectionModel().getSelectedItem();
+            PlaylistSong overSelectedPlaylistSong = lstViewPlaylistSongs.getItems().get(lstViewPlaylistSongs.getSelectionModel().getSelectedIndex() - 1);
+            if (selectedPlaylistSong.getPlaylistID() == overSelectedPlaylistSong.getPlaylistID() && selectedPlaylistSong.getId() == overSelectedPlaylistSong.getId()) {
+                lstViewPlaylistSongs.getSelectionModel().selectPrevious();
+            } else {
+                try {
+                    playlistSongModel.switchPlaylistSongs(overSelectedPlaylistSong, selectedPlaylistSong);
+                } catch (MrsDalException mrsDalException) {
+                    mrsDalException.printStackTrace();
+                    alertDALexception.showAndWait();
+                }
+            }
+        }
+        refreshLstPlaylistSongs();
+    }
 
+    public void btnPlaylistSongDown(ActionEvent actionEvent){
+        if(lstViewPlaylistSongs.getSelectionModel().getSelectedIndex() < lstViewPlaylistSongs.getItems().size()-1) {
+            PlaylistSong selectedPlaylistSong = lstViewPlaylistSongs.getSelectionModel().getSelectedItem();
+            PlaylistSong underSelectedPlaylistSong = lstViewPlaylistSongs.getItems().get(lstViewPlaylistSongs.getSelectionModel().getSelectedIndex() + 1);
+            if (selectedPlaylistSong.getPlaylistID() == underSelectedPlaylistSong.getPlaylistID() && selectedPlaylistSong.getId() == underSelectedPlaylistSong.getId()) {
+                lstViewPlaylistSongs.getSelectionModel().selectNext();
+            } else {
+                try {
+                    playlistSongModel.switchPlaylistSongs(selectedPlaylistSong, underSelectedPlaylistSong);
+                } catch (MrsDalException mrsDalException) {
+                    mrsDalException.printStackTrace();
+                    alertDALexception.showAndWait();
+                }
+            }
+            refreshLstPlaylistSongs();
+        }
+    }
+
+    public void refreshLstPlaylistSongs(){
+        lstViewPlaylistSongs.setItems(playlistSongModel.getSongsInPlaylist(lstViewPlaylists.getSelectionModel().getSelectedItem().getId()));
     }
 }
