@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionModel;
 import javafx.scene.input.MouseEvent;
@@ -32,18 +34,19 @@ public class MainViewController implements Initializable {
     public ListView<PlaylistSong> lstViewPlaylistSongs;
 
     public javafx.scene.control.Label displaySongName;
+    public javafx.scene.control.Button btnPlaylistSongAddRemove;
 
     private SongModel songModel;
     private PlaylistModel playlistModel;
     private PlaylistSongModel playlistSongModel;
 
+    Alert alertDALexception = new Alert(Alert.AlertType.CONFIRMATION, "An error occurred while accessing the database", ButtonType.OK);
+
+
     private boolean isSongPlaying = Boolean.parseBoolean(null);
 
     @FXML
     private javafx.scene.control.TextField typeField;
-
-    @FXML
-    private Button newPlaylistButton;
 
     public void handleNewPlaylistbtn(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/view/AddPlaylistView.fxml"));
@@ -80,7 +83,7 @@ public class MainViewController implements Initializable {
         playlistModel = new PlaylistModel();
         lstViewPlaylists.setItems(playlistModel.getPlaylists());
         playlistSongModel = new PlaylistSongModel();
-        //lstViewPlaylistSongs.setItems(null);
+        btnPlaylistSongAddRemove.setVisible(false);
 
         typeField.textProperty().addListener((observableValue, s, t1) -> {
             lstViewSongs.setItems(songModel.searchedSongs(t1));
@@ -131,21 +134,17 @@ public class MainViewController implements Initializable {
         }
     }
 
-    public void btnChooseSong(MouseEvent mouseEvent) {
-        lstViewPlaylistSongs.getSelectionModel().clearSelection();
-        if(isSongPlaying==true){
-            MusicPlayer.stopSong();
-            isSongPlaying= false;
-        }else {
-            MusicPlayer.play(lstViewSongs.getSelectionModel().getSelectedItem().getUriString());
-            isSongPlaying=true;
-        }
-        displaySongName.setText(lstViewSongs.getSelectionModel().getSelectedItem().getTitle());
-    }
-
     public void addRemovePlaylistSong(ActionEvent actionEvent){
-        if(lstViewSongs.getSelectionModel().isEmpty() && lstViewPlaylistSongs.getSelectionModel().isEmpty()){
-            System.out.println("You need to choose a song");
+        if(lstViewSongs.getSelectionModel().isEmpty() && !lstViewPlaylistSongs.getSelectionModel().isEmpty()){
+            try {
+                //remove the song
+                playlistSongModel.deletePlaylistSong(lstViewPlaylistSongs.getSelectionModel().getSelectedItem());
+                //refresh the list
+                lstViewPlaylistSongs.setItems(playlistSongModel.getSongsInPlaylist(lstViewPlaylists.getSelectionModel().getSelectedItem().getId()));
+            }
+            catch (MrsDalException mrsDalException){
+                alertDALexception.showAndWait();
+            }
         }
         else{
             Song selectedSong = lstViewSongs.getSelectionModel().getSelectedItem();
@@ -156,8 +155,31 @@ public class MainViewController implements Initializable {
     }
 
     public void playlistSelect(MouseEvent mouseEvent){
-        lstViewSongs.getSelectionModel().clearSelection();
+        lstViewPlaylistSongs.getSelectionModel().clearSelection();
+        if(lstViewSongs.getSelectionModel().isEmpty()) btnPlaylistSongAddRemove.setVisible(false);
         lstViewPlaylistSongs.setItems(playlistSongModel.getSongsInPlaylist(lstViewPlaylists.getSelectionModel().getSelectedItem().getId()));
+    }
+
+    public void playlistSongSelect(MouseEvent mouseEvent){
+        lstViewSongs.getSelectionModel().clearSelection();
+        displaySongName.setText(lstViewPlaylistSongs.getSelectionModel().getSelectedItem().getTitle());
+        btnPlaylistSongAddRemove.setText("X");
+        btnPlaylistSongAddRemove.setVisible(true);
+    }
+
+    public void songSelect(MouseEvent mouseEvent) {
+        lstViewPlaylistSongs.getSelectionModel().clearSelection();
+        displaySongName.setText(lstViewSongs.getSelectionModel().getSelectedItem().getTitle());
+        btnPlaylistSongAddRemove.setText("<");
+        btnPlaylistSongAddRemove.setVisible(true);
+        if(isSongPlaying==true){
+            MusicPlayer.stopSong();
+            isSongPlaying= false;
+        }else {
+            MusicPlayer.play(lstViewSongs.getSelectionModel().getSelectedItem().getUriString());
+            isSongPlaying=true;
+        }
+
     }
 
     public void savePlaylist(ActionEvent actionEvent){

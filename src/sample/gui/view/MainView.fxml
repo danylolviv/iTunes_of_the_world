@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="457.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.gui.controller.MainViewController">
    <center>
@@ -47,7 +48,7 @@
             <VBox prefHeight="377.0" prefWidth="249.0" spacing="5.0">
                <children>
                   <Label text="Songs on Playlist" />
-                  <ListView fx:id="lstViewPlaylistSongs" prefHeight="308.0" prefWidth="248.0" />
+                  <ListView fx:id="lstViewPlaylistSongs" onMouseClicked="#playlistSongSelect" prefHeight="308.0" prefWidth="248.0" />
                   <BorderPane prefHeight="82.0" prefWidth="151.0">
                      <center>
                         <HBox prefHeight="68.0" prefWidth="0.0" BorderPane.alignment="CENTER">
@@ -58,11 +59,7 @@
                         </HBox>
                      </center>
                      <right>
-                        <HBox prefHeight="62.0" prefWidth="61.0" BorderPane.alignment="CENTER">
-                           <children>
-                              <Button mnemonicParsing="false" onAction="#savePlaylist" text="Save" />
-                           </children>
-                        </HBox>
+                        <HBox prefHeight="62.0" prefWidth="61.0" BorderPane.alignment="CENTER" />
                      </right>
                   </BorderPane>
                </children>
@@ -81,7 +78,7 @@
             <VBox prefHeight="377.0" prefWidth="284.0" spacing="5.0">
                <children>
                   <Label text="Songs" />
-                  <ListView fx:id="lstViewSongs" onMouseClicked="#btnChooseSong" prefHeight="321.0" prefWidth="283.0" />
+                  <ListView fx:id="lstViewSongs" onMouseClicked="#songSelect" prefHeight="321.0" prefWidth="283.0" />
                   <BorderPane prefHeight="98.0" prefWidth="307.0">
                      <right>
                         <HBox prefHeight="64.0" prefWidth="54.0" BorderPane.alignment="CENTER">
@@ -110,7 +107,10 @@
    <top>
       <BorderPane prefHeight="80.0" prefWidth="362.0" BorderPane.alignment="CENTER">
          <center>
-            <Label fx:id="displaySongName" prefHeight="90.0" prefWidth="348.0" text="No song queued" BorderPane.alignment="CENTER" />
+            <Label fx:id="displaySongName" alignment="CENTER" prefHeight="90.0" prefWidth="348.0" text="No song queued" textAlignment="CENTER" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font></Label>
          </center>
          <left>
             <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
@@ -150,7 +150,7 @@
             </BorderPane>
          </left>
          <right>
-            <HBox prefHeight="80.0" prefWidth="227.0" BorderPane.alignment="CENTER">
+            <HBox prefHeight="80.0" prefWidth="170.0" BorderPane.alignment="CENTER">
                <children>
                   <Label prefHeight="24.0" prefWidth="38.0" text="Search:">
                      <HBox.margin>
@@ -162,11 +162,6 @@
                         <Insets right="5.0" top="40.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="36.0" text="-O">
-                     <HBox.margin>
-                        <Insets top="40.0" />
-                     </HBox.margin>
-                  </Button>
                </children>
             </HBox>
          </right>

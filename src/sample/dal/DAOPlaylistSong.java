@@ -71,7 +71,7 @@ public class DAOPlaylistSong implements DALPlaylistSong {
     @Override
     public void update(PlaylistSong playlistSong,int shiftDirection) throws MrsDalException {
         try(Connection con = dataAccess.getConnection()){
-            String sql = "UPDATE Song_Playlist_Position SET songPosition = ? WHERE playlistId = ?, songId = ?, songPosition = ?)";
+            String sql = "UPDATE Song_Playlist_Position SET songPosition = ? WHERE playlistId = ?, songId = ?, songPosition = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1, playlistSong.getSongPosition() + shiftDirection);
             statement.setInt(2, playlistSong.getPlaylistID());
@@ -87,7 +87,7 @@ public class DAOPlaylistSong implements DALPlaylistSong {
     @Override
     public void delete(PlaylistSong playlistSong) throws MrsDalException {
         try(Connection con = dataAccess.getConnection()){
-            String sql = "DELETE FROM Song_Playlist_Position WHERE playlistId = ?, songId = ?, songPosition = ?)";
+            String sql = "DELETE FROM Song_Playlist_Position WHERE playlistId = ? AND songId = ? AND songPosition = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1, playlistSong.getPlaylistID());
             statement.setInt(2, playlistSong.getId());
