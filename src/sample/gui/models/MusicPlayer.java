@@ -62,4 +62,8 @@ public class MusicPlayer {
             play();
         }
     }
+
+    public void setCurrentSong(Song song){
+        currentSong= song;
+    }
 }

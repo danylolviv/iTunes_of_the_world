@@ -238,8 +238,17 @@ public class MainViewController implements Initializable {
         if(!lstViewPlaylistSongs.getSelectionModel().isEmpty()){
             lstViewSongs.getSelectionModel().clearSelection();
             displaySongName.setText(lstViewPlaylistSongs.getSelectionModel().getSelectedItem().getTitle());
+            MP.setCurrentSong(lstViewPlaylistSongs.getSelectionModel().getSelectedItem());
+            btnPlaylistSongAddRemove.setText("X");
             btnPlaylistSongAddRemove.setText(">");
             btnPlaylistSongAddRemove.setVisible(true);
+            if(isSongPlaying==true){
+                MP.stopSong();
+                isSongPlaying= false;
+            }else {
+                MP.play();
+                isSongPlaying=true;
+            }
         }
     }
 
@@ -250,7 +259,7 @@ public class MainViewController implements Initializable {
             btnPlaylistSongAddRemove.setText("<");
             btnPlaylistSongAddRemove.setVisible(true);
         }
-        MP.currentSong = lstViewSongs.getSelectionModel().getSelectedItem();
+        MP.setCurrentSong(lstViewPlaylistSongs.getSelectionModel().getSelectedItem());
         if(isSongPlaying==true){
             MP.stopSong();
             isSongPlaying= false;
