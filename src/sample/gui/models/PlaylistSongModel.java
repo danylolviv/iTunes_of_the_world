@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import sample.be.PlaylistSong;
 import sample.bll.PlaylistSongManager;
 import sample.exeptions.MrsDalException;
+import sample.gui.controller.MainViewController;
 
 import java.util.Collections;
 

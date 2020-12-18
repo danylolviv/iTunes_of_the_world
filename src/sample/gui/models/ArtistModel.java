@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 import sample.be.Artist;
 import sample.bll.ArtistManager;
 
+import sample.gui.controller.MainViewController;
+
 public class ArtistModel {
     private ArtistManager artistManager;
     private ObservableList<Artist> artists;

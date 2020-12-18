@@ -3,6 +3,8 @@ package sample.gui.models;
 import sample.be.Song;
 import sample.bll.SongManager;
 
+import sample.gui.controller.MainViewController;
+
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;

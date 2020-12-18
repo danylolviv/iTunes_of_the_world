@@ -1,6 +1,6 @@
 package sample.be;
 
-public class PlaylistSong extends Song{
+public class PlaylistSong extends Song {
     private int playlistID;
     private int songPosition;
 

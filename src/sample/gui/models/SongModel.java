@@ -9,6 +9,7 @@ import sample.bll.ArtistManager;
 import sample.bll.GenreManager;
 import sample.bll.SongManager;
 import sample.exeptions.MrsDalException;
+import sample.gui.controller.MainViewController;
 
 import java.util.ArrayList;
 import java.util.List;

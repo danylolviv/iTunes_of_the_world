@@ -6,6 +6,9 @@ import sample.be.Artist;
 import sample.be.Genre;
 import sample.bll.GenreManager;
 
+
+import sample.gui.controller.MainViewController;
+
 public class GenreModel {
     private GenreManager genreManager;
     private ObservableList<Genre> genres;
