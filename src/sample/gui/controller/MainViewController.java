@@ -26,6 +26,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static sample.gui.models.MusicPlayer.currentSong;
+
 public class MainViewController implements Initializable {
     public ListView<Song> lstViewSongs;
     public ListView<Playlist> lstViewPlaylists;
@@ -36,6 +38,7 @@ public class MainViewController implements Initializable {
     private SongModel songModel;
     private PlaylistModel playlistModel;
     private PlaylistSongModel playlistSongModel;
+    private MusicPlayer MP = new MusicPlayer(currentSong);
 
     private boolean isSongPlaying = Boolean.parseBoolean(null);
 
@@ -85,7 +88,6 @@ public class MainViewController implements Initializable {
         typeField.textProperty().addListener((observableValue, s, t1) -> {
             lstViewSongs.setItems(songModel.searchedSongs(t1));
         });
-
     }
 
     public void btnDeleteSong() throws MrsDalException {
@@ -96,12 +98,12 @@ public class MainViewController implements Initializable {
 
         if(isSongPlaying==true){
 
-            MusicPlayer.stopSong();
+            MP.stopSong();
             isSongPlaying=false;
         }
 
         else {
-            MusicPlayer.resume(lstViewSongs.getSelectionModel().getSelectedItem().getUriString());
+            MP.resume();
             isSongPlaying=true;
         }
     }
@@ -113,9 +115,10 @@ public class MainViewController implements Initializable {
         }
         else{
             lstViewSongs.getSelectionModel().selectPrevious();
-            MusicPlayer.stopSong();
-            MusicPlayer.play(lstViewSongs.getSelectionModel().getSelectedItem().getUriString());
-            displaySongName.setText(lstViewSongs.getSelectionModel().getSelectedItem().getTitle());
+            MP.currentSong= lstViewSongs.getSelectionModel().getSelectedItem();
+            MP.stopSong();
+            MP.play();
+            displaySongName.setText(currentSong.getTitle());
         }
     }
 
@@ -125,22 +128,24 @@ public class MainViewController implements Initializable {
         }
         else{
             lstViewSongs.getSelectionModel().selectNext();
-            MusicPlayer.stopSong();
-            MusicPlayer.play(lstViewSongs.getSelectionModel().getSelectedItem().getUriString());
-            displaySongName.setText(lstViewSongs.getSelectionModel().getSelectedItem().getTitle());
+            MP.currentSong = lstViewSongs.getSelectionModel().getSelectedItem();
+            MP.stopSong();
+            MP.play();
+            displaySongName.setText(MP.currentSong.getTitle());
         }
     }
 
     public void btnChooseSong(MouseEvent mouseEvent) {
         lstViewPlaylistSongs.getSelectionModel().clearSelection();
+        MP.currentSong = lstViewSongs.getSelectionModel().getSelectedItem();
         if(isSongPlaying==true){
-            MusicPlayer.stopSong();
+            MP.stopSong();
             isSongPlaying= false;
         }else {
-            MusicPlayer.play(lstViewSongs.getSelectionModel().getSelectedItem().getUriString());
+            MP.play();
             isSongPlaying=true;
         }
-        displaySongName.setText(lstViewSongs.getSelectionModel().getSelectedItem().getTitle());
+        displaySongName.setText(currentSong.getTitle());
     }
 
     public void addRemovePlaylistSong(ActionEvent actionEvent){
