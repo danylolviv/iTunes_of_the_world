@@ -253,19 +253,20 @@ public class MainViewController implements Initializable {
     }
 
     public void songSelect(MouseEvent mouseEvent) {
-        lstViewPlaylistSongs.getSelectionModel().clearSelection();
-        displaySongName.setText(lstViewSongs.getSelectionModel().getSelectedItem().getTitle());
-        if(!lstViewPlaylists.getSelectionModel().isEmpty()) {
-            btnPlaylistSongAddRemove.setText("<");
+        if(!lstViewSongs.getSelectionModel().isEmpty()){
+            lstViewPlaylistSongs.getSelectionModel().clearSelection();
+            displaySongName.setText(lstViewSongs.getSelectionModel().getSelectedItem().getTitle());
+            MP.setCurrentSong(lstViewSongs.getSelectionModel().getSelectedItem());
+            btnPlaylistSongAddRemove.setText("X");
+            btnPlaylistSongAddRemove.setText(">");
             btnPlaylistSongAddRemove.setVisible(true);
-        }
-        MP.setCurrentSong(lstViewPlaylistSongs.getSelectionModel().getSelectedItem());
-        if(isSongPlaying==true){
-            MP.stopSong();
-            isSongPlaying= false;
-        }else {
-            MP.play();
-            isSongPlaying=true;
+            if(isSongPlaying==true){
+                MP.stopSong();
+                isSongPlaying= false;
+            }else {
+                MP.play();
+                isSongPlaying=true;
+            }
         }
     }
 

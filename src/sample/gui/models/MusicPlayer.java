@@ -64,6 +64,6 @@ public class MusicPlayer {
     }
 
     public void setCurrentSong(Song song){
-        currentSong= song;
+        this.currentSong= song;
     }
 }
