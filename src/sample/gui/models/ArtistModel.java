@@ -17,6 +17,12 @@ public class ArtistModel {
 
     public ObservableList<Artist> getAllArtists() {
         return artists;
+    }
 
+    public Artist findArtistByName(String name){
+        for (Artist artist:artists) {
+            if (artist.getName().equals(name)) return artist;
+        }
+        return null;
     }
 }

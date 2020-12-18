@@ -9,21 +9,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionModel;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sample.be.Playlist;
 import sample.be.PlaylistSong;
 import sample.be.Song;
-import sample.bll.SongManager;
 import sample.exeptions.MrsDalException;
 import sample.gui.models.MusicPlayer;
 import sample.gui.models.PlaylistModel;
 import sample.gui.models.PlaylistSongModel;
 import sample.gui.models.SongModel;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,12 +28,17 @@ import java.util.ResourceBundle;
 import static sample.gui.models.MusicPlayer.currentSong;
 
 public class MainViewController implements Initializable {
-    public ListView<Song> lstViewSongs;
-    public ListView<Playlist> lstViewPlaylists;
-    public ListView<PlaylistSong> lstViewPlaylistSongs;
+    @FXML
+    private ListView<Song> lstViewSongs;
+    @FXML
+    private ListView<Playlist> lstViewPlaylists;
+    @FXML
+    private ListView<PlaylistSong> lstViewPlaylistSongs;
 
-    public javafx.scene.control.Label displaySongName;
-    public javafx.scene.control.Button btnPlaylistSongAddRemove;
+    @FXML
+    private javafx.scene.control.Label displaySongName;
+    @FXML
+    private javafx.scene.control.Button btnPlaylistSongAddRemove;
 
     private SongModel songModel;
     private PlaylistModel playlistModel;
@@ -51,10 +53,12 @@ public class MainViewController implements Initializable {
     @FXML
     private javafx.scene.control.TextField typeField;
 
-    public void handleNewPlaylistbtn(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/view/AddPlaylistView.fxml"));
+    @FXML
+    private void handleNewPlaylistbtn(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/view/AddEditPlaylistView.fxml"));
         Parent root = loader.load();
 
+        ((AddEditPlaylistViewController)loader.getController()).setPlaylistModel(playlistModel);
         Stage addPlaylistViewStage = new Stage();
         addPlaylistViewStage.setScene(new Scene(root));
 
@@ -63,18 +67,51 @@ public class MainViewController implements Initializable {
         addPlaylistViewStage.show();
     }
 
-
-
-    public void handleNewSongbtn(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/view/AddSongView.fxml"));
+    @FXML
+    private void handleEditPlaylistbtn(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/view/AddEditPlaylistView.fxml"));
         Parent root = loader.load();
 
-        Stage addPlaylistViewStage = new Stage();
-        addPlaylistViewStage.setScene(new Scene(root));
+        ((AddEditPlaylistViewController)loader.getController()).setPlaylistModel(playlistModel);
+        ((AddEditPlaylistViewController)loader.getController()).setEditedPlaylist(lstViewPlaylists.getSelectionModel().getSelectedItem());
 
-        addPlaylistViewStage.initModality(Modality.WINDOW_MODAL);
+        Stage editPlaylistViewStage = new Stage();
+        editPlaylistViewStage.setScene(new Scene(root));
 
-        addPlaylistViewStage.show();
+        editPlaylistViewStage.initModality(Modality.WINDOW_MODAL);
+
+        editPlaylistViewStage.show();
+    }
+
+    @FXML
+    private void handleNewSongbtn(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/view/AddEditSongView.fxml"));
+        Parent root = loader.load();
+
+        ((AddEditSongViewController)loader.getController()).setSongModel(songModel);
+
+        Stage addEditSongViewStage = new Stage();
+        addEditSongViewStage.setScene(new Scene(root));
+
+        addEditSongViewStage.initModality(Modality.WINDOW_MODAL);
+
+        addEditSongViewStage.show();
+    }
+
+    @FXML
+    private void handleEditSongBtn(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/view/AddEditSongView.fxml"));
+        Parent root = loader.load();
+
+        ((AddEditSongViewController)loader.getController()).setSongModel(songModel);
+        ((AddEditSongViewController)loader.getController()).setEditedSong(lstViewSongs.getSelectionModel().getSelectedItem());
+
+        Stage addEditSongViewStage = new Stage();
+        addEditSongViewStage.setScene(new Scene(root));
+
+        addEditSongViewStage.initModality(Modality.WINDOW_MODAL);
+
+        addEditSongViewStage.show();
     }
 
 
@@ -82,7 +119,7 @@ public class MainViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         songModel = new SongModel();
-        lstViewSongs.setItems(songModel.getAllSongs());
+        lstViewSongs.setItems(songModel.getSongs());
         playlistModel = new PlaylistModel();
         lstViewPlaylists.setItems(playlistModel.getPlaylists());
         playlistSongModel = new PlaylistSongModel();
@@ -93,8 +130,36 @@ public class MainViewController implements Initializable {
         });
     }
 
-    public void btnDeleteSong() throws MrsDalException {
-        songModel.deleteSong(lstViewSongs.getSelectionModel().getSelectedItem());
+    public void btnDeleteSong(){
+        try {
+            songModel.deleteSong(lstViewSongs.getSelectionModel().getSelectedItem());
+            lstViewSongs.setItems(songModel.getSongs());
+            lstViewSongs.getSelectionModel().selectPrevious();
+        }
+        catch (MrsDalException mrsDalException) {
+            mrsDalException.printStackTrace();
+            alertDALexception.showAndWait();
+        }
+    }
+
+    public void btnDeletePlaylist(){
+        try {
+
+
+            for (PlaylistSong playlistSong: lstViewPlaylistSongs.getItems()){
+                if(playlistSong.getPlaylistID() == lstViewPlaylists.getSelectionModel().getSelectedItem().getId()){
+                    playlistSongModel.deletePlaylistSong(playlistSong);
+                }
+            }
+            playlistModel.deletePlaylist(lstViewPlaylists.getSelectionModel().getSelectedItem());
+            lstViewPlaylists.getSelectionModel().selectPrevious();
+            lstViewPlaylists.setItems(playlistModel.getPlaylists());
+            lstViewPlaylistSongs.setItems(null);
+        }
+        catch (MrsDalException mrsDalException) {
+            mrsDalException.printStackTrace();
+            alertDALexception.showAndWait();
+        }
     }
 
     public void btnPlayMusic(ActionEvent actionEvent) {
@@ -165,7 +230,7 @@ public class MainViewController implements Initializable {
 
     public void playlistSelect(MouseEvent mouseEvent){
         lstViewPlaylistSongs.getSelectionModel().clearSelection();
-        if(lstViewSongs.getSelectionModel().isEmpty()) btnPlaylistSongAddRemove.setVisible(false);
+        btnPlaylistSongAddRemove.setVisible(!lstViewSongs.getSelectionModel().isEmpty());
         refreshLstPlaylistSongs();
     }
 
@@ -173,7 +238,7 @@ public class MainViewController implements Initializable {
         if(!lstViewPlaylistSongs.getSelectionModel().isEmpty()){
             lstViewSongs.getSelectionModel().clearSelection();
             displaySongName.setText(lstViewPlaylistSongs.getSelectionModel().getSelectedItem().getTitle());
-            btnPlaylistSongAddRemove.setText("X");
+            btnPlaylistSongAddRemove.setText(">");
             btnPlaylistSongAddRemove.setVisible(true);
         }
     }
@@ -181,8 +246,10 @@ public class MainViewController implements Initializable {
     public void songSelect(MouseEvent mouseEvent) {
         lstViewPlaylistSongs.getSelectionModel().clearSelection();
         displaySongName.setText(lstViewSongs.getSelectionModel().getSelectedItem().getTitle());
-        btnPlaylistSongAddRemove.setText("<");
-        btnPlaylistSongAddRemove.setVisible(true);
+        if(!lstViewPlaylists.getSelectionModel().isEmpty()) {
+            btnPlaylistSongAddRemove.setText("<");
+            btnPlaylistSongAddRemove.setVisible(true);
+        }
         MP.currentSong = lstViewSongs.getSelectionModel().getSelectedItem();
         if(isSongPlaying==true){
             MP.stopSong();

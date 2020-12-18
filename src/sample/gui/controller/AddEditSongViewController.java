@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import sample.be.Artist;
 import sample.be.Genre;
 import sample.be.Song;
+import sample.exeptions.MrsDalException;
 import sample.gui.models.ArtistModel;
 import sample.gui.models.GenreModel;
 import sample.gui.models.SongModel;
@@ -18,8 +19,10 @@ import sample.gui.models.SongModel;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddSongViewController implements Initializable {
+public class AddEditSongViewController implements Initializable {
 
+    @FXML
+    private Button btnAddEdit;
     @FXML
     private TextField txtTitle;
     @FXML
@@ -33,12 +36,11 @@ public class AddSongViewController implements Initializable {
     @FXML
     private Button closeButton;
 
-    private SongModel songModel = new SongModel();
+    private SongModel songModel;
     private ArtistModel artistModel;
     private GenreModel genreModel;
 
-    private Song song;
-    ObservableList<Song> songs = FXCollections.observableArrayList();
+    private Song editedSong;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -47,18 +49,45 @@ public class AddSongViewController implements Initializable {
         artistBox.setItems(artistModel.getAllArtists());
         genreModel = new GenreModel();
         genreBox.setItems(genreModel.getAllGenres());
+
+    }
+
+    public void setSongModel(SongModel songModel){
+        this.songModel = songModel;
+    }
+
+    public void setEditedSong(Song editedSong) {
+        this.editedSong = editedSong;
+        editFields();
+    }
+
+    public void editFields() {
+        btnAddEdit.setText("Edit");
+        txtTitle.setText(editedSong.getTitle());
+        artistBox.setValue(artistModel.findArtistByName(editedSong.getArtist()));
+        genreBox.setValue(genreModel.findGenreByName(editedSong.getGenre()));
+        txtPath.setText(editedSong.getUriString());
     }
 
     @FXML
-    public void addSong()
+    private void addEditSong()
     {
-        int id = 57;
         String title = txtTitle.getText();
         String artist = artistBox.getValue().getName();
         String genre = genreBox.getValue().getName();
         String path = txtPath.getText();
 
-        songModel.addSong(title,artist,genre,path);
+        if(btnAddEdit.getText().equals("Edit")){
+            try {
+                songModel.editSong(new Song(editedSong.getId(),title,artist,genre,10,path));
+            }
+            catch (MrsDalException mrsDalException) {
+                mrsDalException.printStackTrace();
+            }
+        }
+        else {
+            songModel.addSong(title,artist,genre,path);
+        }
         closeWindow();
     }
 

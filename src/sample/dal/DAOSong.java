@@ -81,7 +81,7 @@ public class DAOSong implements DALSong {
     @Override
     public void update(Song song) throws MrsDalException {
         try(Connection con = dataAccess.getConnection()){
-            String sql = "UPDATE Songs SET title = ?, artistID = (SELECT id FROM Artist WHERE artist=?), genreID = (SELECT id FROM Genres WHERE genre=?), songUrl = ? WHERE id = ?)";
+            String sql = "UPDATE Songs SET title = ?, artistID = (SELECT id FROM Artist WHERE artist=?), genreID = (SELECT id FROM Genres WHERE genre=?), songUrl = ? WHERE id = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, song.getTitle());
             statement.setString(2, song.getArtist());

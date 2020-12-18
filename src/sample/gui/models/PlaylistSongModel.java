@@ -2,9 +2,7 @@ package sample.gui.models;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import sample.be.Playlist;
 import sample.be.PlaylistSong;
-import sample.bll.PlaylistManager;
 import sample.bll.PlaylistSongManager;
 import sample.exeptions.MrsDalException;
 
@@ -22,10 +20,6 @@ public class PlaylistSongModel {
         playlistSongManager = new PlaylistSongManager();
         playlistSongs = FXCollections.observableArrayList();
         playlistSongs.addAll(playlistSongManager.getAllPlaylistSongs());
-    }
-
-    public ObservableList<PlaylistSong> getPlaylistSongs() {
-        return playlistSongs;
     }
 
     public ObservableList<PlaylistSong> getSongsInPlaylist(int playlistID) {

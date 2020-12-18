@@ -31,4 +31,8 @@ public class SongManager {
     public void deleteSong(Song song) throws MrsDalException {
         daoSong.delete(song);
     }
+
+    public void updateSong(Song song) throws MrsDalException {
+        daoSong.update(song);
+    }
 }

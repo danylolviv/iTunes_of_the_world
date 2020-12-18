@@ -56,9 +56,10 @@ public class DAOPlaylist implements DALPlaylist {
     @Override
     public void update(Playlist playlist, String newName) throws MrsDalException {
         try(Connection con = dataAccess.getConnection()){
-            String sql = "UPDATE Playlists SET playlistName = ? WHERE id = ?)";
+            String sql = "UPDATE Playlists SET playlistName = ? WHERE id = ?";
             PreparedStatement statement = con.prepareStatement(sql);
-            statement.setInt(1, playlist.getId());
+            statement.setString(1, newName);
+            statement.setInt(2, playlist.getId());
             statement.executeUpdate();
 
         } catch (SQLException ex) {
@@ -69,7 +70,7 @@ public class DAOPlaylist implements DALPlaylist {
     @Override
     public void delete(Playlist playlist) throws MrsDalException {
         try(Connection con = dataAccess.getConnection()){
-            String sql = "DELETE FROM Playlists WHERE id = ?)";
+            String sql = "DELETE FROM Playlists WHERE id = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1, playlist.getId());
             statement.executeUpdate();

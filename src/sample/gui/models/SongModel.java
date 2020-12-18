@@ -18,7 +18,7 @@ public class SongModel {
     private ArtistManager artistManager;
     private GenreManager genreManager;
     private SongManager songManager;
-    private ObservableList<Song> songs;
+    private final ObservableList<Song> songs;
 
     public SongModel(){
         songManager = new SongManager();
@@ -29,11 +29,10 @@ public class SongModel {
     }
 
     public void updateSongList(){
-        songs = FXCollections.observableArrayList();
-        songs.addAll(songManager.getAllSongs());
+        songs.setAll(songManager.getAllSongs());
     }
 
-    public ObservableList<Song> getAllSongs() {
+    public ObservableList<Song> getSongs() {
         return songs;
     }
 
@@ -56,11 +55,16 @@ public class SongModel {
 
     public void addSong(String title, String artist, String genre, String path) {
         songManager.addSong(new Song(1,title,artist,genre,10,path));
-
+        updateSongList();
     }
 
     public void deleteSong(Song song) throws MrsDalException {
         songManager.deleteSong(song);
-        songs.remove(song);
+        updateSongList();
+    }
+
+    public void editSong(Song updatedSong) throws MrsDalException{
+        songManager.updateSong(updatedSong);
+        updateSongList();
     }
 }
