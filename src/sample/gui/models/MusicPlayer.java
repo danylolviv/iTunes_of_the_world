@@ -1,20 +1,25 @@
 package sample.gui.models;
 
+import sample.be.Song;
+import sample.bll.SongManager;
+
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 
 public class MusicPlayer {
-    private static Clip audioClip;
-    private static AudioInputStream audioStream;
-    private static long clipTimePosition;
-    private static String path;
+    private Clip audioClip;
+    private AudioInputStream audioStream;
+    private long clipTimePosition;
+    private String path;
+    public static Song currentSong;
 
+    public MusicPlayer(Song currentSong){
+    }
 
-    public static void play(String path) {
-        String audioFilePath = path;
+    public void play() {
+        String audioFilePath = getUrlFromSong();
         File audioFile = new File(audioFilePath);
-
         try {
             audioStream = AudioSystem.getAudioInputStream(audioFile);
         } catch (UnsupportedAudioFileException e) {
@@ -36,21 +41,25 @@ public class MusicPlayer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-       audioClip.start();
+        audioClip.start();
+    }
+    public String getUrlFromSong(){
+        return currentSong.getUriString();
     }
 
-    public static void stopSong(){
+
+    public void stopSong(){
         clipTimePosition = audioClip.getMicrosecondPosition();
         audioClip.stop();
     }
 
-    public static void resume(String path){
-       if(clipTimePosition>0) {
-           audioClip.setMicrosecondPosition(clipTimePosition);
+    public void resume(){
+        if(clipTimePosition>0) {
+            audioClip.setMicrosecondPosition(clipTimePosition);
             audioClip.start();
-       }
+        }
         else{
-            play(path);
-       }
+            play();
+        }
     }
 }
