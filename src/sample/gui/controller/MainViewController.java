@@ -138,19 +138,6 @@ public class MainViewController implements Initializable {
         }
     }
 
-    public void btnChooseSong(MouseEvent mouseEvent) {
-        lstViewPlaylistSongs.getSelectionModel().clearSelection();
-        MP.currentSong = lstViewSongs.getSelectionModel().getSelectedItem();
-        if(isSongPlaying==true){
-            MP.stopSong();
-            isSongPlaying= false;
-        }else {
-            MP.play();
-            isSongPlaying=true;
-        }
-        displaySongName.setText(currentSong.getTitle());
-    }
-
     public void addRemovePlaylistSong(ActionEvent actionEvent){
         if(lstViewSongs.getSelectionModel().isEmpty() && !lstViewPlaylistSongs.getSelectionModel().isEmpty()){
             try {
@@ -189,14 +176,14 @@ public class MainViewController implements Initializable {
         displaySongName.setText(lstViewSongs.getSelectionModel().getSelectedItem().getTitle());
         btnPlaylistSongAddRemove.setText("<");
         btnPlaylistSongAddRemove.setVisible(true);
+        MP.currentSong = lstViewSongs.getSelectionModel().getSelectedItem();
         if(isSongPlaying==true){
-            MusicPlayer.stopSong();
+            MP.stopSong();
             isSongPlaying= false;
         }else {
-            MusicPlayer.play(lstViewSongs.getSelectionModel().getSelectedItem().getUriString());
+            MP.play();
             isSongPlaying=true;
         }
-
     }
 
     public void savePlaylist(ActionEvent actionEvent){
